@@ -61,6 +61,43 @@
     margin-bottom: 0.4rem;
 }
 
+
+/* Badge Styles */
+.badges-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.badges-title {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.badge-item {
+    display: flex;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.badge-item:hover {
+    transform: scale(1.1);
+}
+
+.badge-img {
+    width: 100px;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
 @media (max-width: 768px) {
     .achievements-grid {
         grid-template-columns: 1fr;

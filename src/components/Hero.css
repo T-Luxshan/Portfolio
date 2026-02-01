@@ -131,6 +131,35 @@
     display: block;
 }
 
+
+.hero-contact-info {
+    margin-top: 3rem;
+    display: flex;
+    gap: 4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.contact-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 @media (max-width: 768px) {
     .hero-container {
         grid-template-columns: 1fr;
@@ -152,5 +181,11 @@
 
     .hero-image-wrapper {
         order: -1;
+    }
+
+    .hero-contact-info {
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
     }
 }

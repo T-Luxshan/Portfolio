@@ -1,5 +1,9 @@
 import React from 'react';
 import './Achievements.css';
+import problemSolvingBadge from '../assets/images/badges/problem-solving-gold.png';
+import javaBadge from '../assets/images/badges/java-gold.png';
+import pythonBadge from '../assets/images/badges/python-gold.png';
+import cBadge from '../assets/images/badges/c-silver.png';
 
 const Achievements = () => {
     return (
@@ -16,6 +20,29 @@ const Achievements = () => {
                             <li>Code Rush 2023 - INTECS UoM (15th/120)</li>
                             <li>MoraXtreme 8.0 - IEEESB UoM</li>
                         </ul>
+
+                        <div className="badges-container">
+                            <h4 className="badges-title">HackerRank Badges</h4>
+                            <div className="badges-grid">
+
+                                <div className="badge-item">
+                                    <img src={problemSolvingBadge} alt="Problem Solving Gold Badge" className="badge-img" />
+                                </div>
+
+                                <div className="badge-item">
+                                    <img src={javaBadge} alt="Java Gold Badge" className="badge-img" />
+                                </div>
+
+                                <div className="badge-item">
+                                    <img src={pythonBadge} alt="Python Gold Badge" className="badge-img" />
+                                </div>
+
+                                <div className="badge-item">
+                                    <img src={cBadge} alt="C Silver Badge" className="badge-img" />
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                     <div className="glass-panel achievements-column">
