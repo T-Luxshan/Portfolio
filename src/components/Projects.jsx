@@ -17,8 +17,8 @@ const Projects = () => {
             link: "https://github.com/T-Luxshan?tab=repositories&q=LabourLink"
         },
         {
-            title: "Mini Social Media Application",
-            description: "Social platform with posts, likes, and profiles. Features JWT auth, password reset, and CI/CD pipeline establishment.",
+            title: "LinkNestSocialMedia",
+            description: "LinkNestSocialMedia is a full-stack mini social media application platform built with a modern technology stack. It features a responsive frontend, a robust backend API, and containerized deployment.",
             technologies: ["React", "Spring Boot", "MySQL", "Docker"],
             link: "https://github.com/T-Luxshan/SurgeGlobalSocialMedia.git"
         },
