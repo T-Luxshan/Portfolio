@@ -32,12 +32,20 @@ const Hero = () => {
             <a href="https://www.hackerrank.com/profile/luckybraveboys" target="_blank" rel="noopener noreferrer" aria-label="HackerRank">
               <FaHackerrank />
             </a>
-            <a href="mailto:luxshan.thuraisingam@gmail.com" aria-label="Email">
-              <FaEnvelope />
-            </a>
             <a href="tel:+94764541834" aria-label="Phone">
               <FaPhone />
             </a>
+          </div>
+
+          <div className="hero-contact-info">
+            <div className="contact-info-item">
+              <span className="info-label">Email</span>
+              <a href="mailto:luxshan.thuraisingam@gmail.com" className="info-value">luxshan.thuraisingam@gmail.com</a>
+            </div>
+            <div className="contact-info-item">
+              <span className="info-label">Location</span>
+              <span className="info-value">Colombo, Sri Lanka</span>
+            </div>
           </div>
         </div>
 
