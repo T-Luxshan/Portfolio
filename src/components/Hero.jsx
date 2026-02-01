@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
+import { SiLetterboxd } from 'react-icons/si';
 import profileImg from '../assets/images/profile.jpg';
 import './Hero.css';
 
@@ -31,6 +32,9 @@ const Hero = () => {
             </a>
             <a href="https://www.hackerrank.com/profile/luckybraveboys" target="_blank" rel="noopener noreferrer" aria-label="HackerRank">
               <FaHackerrank />
+            </a>
+            <a href="https://letterboxd.com/luxshan/" target="_blank" rel="noopener noreferrer" aria-label="Letterboxd">
+              <SiLetterboxd />
             </a>
             <a href="tel:+94764541834" aria-label="Phone">
               <FaPhone />
