@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import profileImg from '../assets/images/profile.jpg';
 import './Hero.css';
 
@@ -11,10 +11,10 @@ const Hero = () => {
           <h1 className="hero-name">Luxshan Thuraisingam</h1>
           <h2 className="hero-title">Software Engineer</h2>
           <p className="hero-description">
-            Software Engineer with R&D experience. Proficient in Go, Java (Spring Boot), and React, 
+            Software Engineer with R&D experience. Proficient in Go, Java (Spring Boot), and React,
             with a strong foundation in designing complex systems and CI/CD pipelines.
           </p>
-          
+
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View Projects</a>
             <a href="#contact" className="btn btn-outline">Contact Me</a>
@@ -27,6 +27,12 @@ const Hero = () => {
             <a href="https://www.linkedin.com/in/luxshan-thuraisingam-b47264194/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
+            <a href="https://medium.com/@luxshan.thuraisingam" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+              <FaMedium />
+            </a>
+            <a href="https://www.hackerrank.com/profile/luckybraveboys" target="_blank" rel="noopener noreferrer" aria-label="HackerRank">
+              <FaHackerrank />
+            </a>
             <a href="mailto:luxshan.thuraisingam@gmail.com" aria-label="Email">
               <FaEnvelope />
             </a>
@@ -35,7 +41,7 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="hero-image-wrapper">
           <div className="hero-image-glass">
             <img src={profileImg} alt="Luxshan Thuraisingam" className="hero-image" />
