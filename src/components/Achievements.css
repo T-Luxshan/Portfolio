@@ -1,0 +1,68 @@
+.achievements-section {
+    padding: 6rem 0;
+    background-color: var(--bg-dark);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.achievements-column {
+    padding: 2.5rem;
+}
+
+.column-title {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1rem;
+}
+
+.achievements-list {
+    list-style-type: none;
+}
+
+.achievements-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-primary);
+}
+
+.achievements-list li::before {
+    content: '🏆';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 0.9em;
+}
+
+.activity-item {
+    margin-bottom: 2rem;
+}
+
+.activity-item h4 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.activity-details {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.activity-details li {
+    margin-bottom: 0.4rem;
+}
+
+@media (max-width: 768px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+}
