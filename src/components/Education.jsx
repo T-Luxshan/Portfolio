@@ -25,6 +25,9 @@ const Education = () => {
                                         <FaMapMarkerAlt /> <span>Colombo, Sri Lanka</span>
                                     </div>
                                 </div>
+                                {/* <div className="edu-details">
+                                    <p className="edu-result">CGPA: <span className="highlight">3.45/4.0</span></p>
+                                </div> */}
                             </div>
                         </div>
                     </div>
