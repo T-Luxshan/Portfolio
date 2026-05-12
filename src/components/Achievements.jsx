@@ -50,10 +50,8 @@ const Achievements = () => {
                         <div className="activity-item">
                             <h4>AIESEC in Sri Lanka (2022 -- 2024)</h4>
                             <ul className="activity-details">
-                                <li>Digital Experience Team Member - Graphic Designer</li>
-                                <li>Organizing Committee Member - Lead CS 9.0</li>
-                                <li>OC Vice President - Beauty Beyond Ceylon</li>
-                                <li>Information Management Team Member - Data Analyst</li>
+                                <li>Organizing Committee Member - External Relations, Lead CS 9.0 (Nov 2022 -- Feb 2023)</li>
+                                <li>OC Vice President - External Relations, Beauty Beyond Ceylon (May 2022 -- Aug 2022)</li>
                             </ul>
                         </div>
                         <div className="activity-item">

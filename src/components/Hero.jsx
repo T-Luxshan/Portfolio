@@ -2,6 +2,7 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import { SiLetterboxd } from 'react-icons/si';
 import profileImg from '../assets/images/profile.jpg';
+import resumePdf from '../../Luxshan_Thuraisingam_SE.pdf';
 import './Hero.css';
 
 const Hero = () => {
@@ -17,6 +18,7 @@ const Hero = () => {
 
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View Projects</a>
+            <a href={resumePdf} download="Luxshan_Thuraisingam_Resume.pdf" className="btn btn-outline">Download Resume</a>
             <a href="#contact" className="btn btn-outline">Contact Me</a>
           </div>
 

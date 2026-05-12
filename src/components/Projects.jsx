@@ -5,6 +5,18 @@ import './Projects.css';
 const Projects = () => {
     const projects = [
         {
+            title: "VM-Aware Shifted Horizon MPC for Energy-Aware VM Auto-scaling",
+            description: "Developed a hybrid ML and Model Predictive Control (MPC) framework for energy-aware auto-scaling of Virtual Machines in Kubernetes. Built an ML surrogate model pipeline to forecast energy and latency, and implemented a custom MPC receding-horizon controller to optimize VM replica counts.",
+            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Kubernetes"],
+            link: "#"
+        },
+        {
+            title: "Message Broker Benchmarking System",
+            description: "Developing a Go-based framework with multi-producer/consumer simulations to measure throughput, latency, and reliability across Kafka, RabbitMQ, and Redis under high-concurrency workloads. Features configurable load scenarios including simple queueing, pub/sub broadcast, and failure recovery.",
+            technologies: ["Golang", "Kafka", "RabbitMQ", "Redis", "Docker"],
+            link: "https://github.com/T-Luxshan/message-broker-benchmark"
+        },
+        {
             title: "Distributed Queue Evaluation",
             description: "Implemented and benchmarked multiple distributed queue technologies to evaluate performance characteristics. Simulated high-concurrency scenarios to analyze throughput and latency.",
             technologies: ["Golang", "Redis", "RabbitMQ", "Docker"],
@@ -22,12 +34,12 @@ const Projects = () => {
             technologies: ["React", "Spring Boot", "MySQL", "Docker"],
             link: "https://github.com/T-Luxshan/SurgeGlobalSocialMedia.git"
         },
-        {
-            title: "Intern Tracking System",
-            description: "Frontend development for internship application tracking system.",
-            technologies: ["React", "TypeScript", "Vite", "Node.js"],
-            link: "#"
-        },
+        // {
+        //     title: "Intern Tracking System",
+        //     description: "Frontend development for internship application tracking system.",
+        //     technologies: ["React", "TypeScript", "Vite", "Node.js"],
+        //     link: "#"
+        // },
         {
             title: "Candle Making Machine Automation",
             description: "Automated hardware system for candle manufacturing. Designed PCB and integrated IR sensors.",
