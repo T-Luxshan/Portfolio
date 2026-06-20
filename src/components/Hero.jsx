@@ -2,7 +2,7 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import { SiLetterboxd } from 'react-icons/si';
 import profileImg from '../assets/images/profile.jpg';
-import resumePdf from '../../Luxshan_Thuraisingam_SE.pdf';
+import resumePdf from '../../Luxshan Thuraisingam-SE.pdf';
 import './Hero.css';
 
 const Hero = () => {

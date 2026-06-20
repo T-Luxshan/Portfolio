@@ -8,13 +8,13 @@ const About = () => {
                 <h2 className="section-title">About Me</h2>
                 <div className="glass-panel about-content">
                     <p>
-                        Software Engineer with R&D internship experience at PickMe. Proven expertise in designing complex systems,
-                        including a three-layer image forensics system, benchmarking distributed message brokers (Kafka, Redis, RabbitMQ)
-                        under high-concurrency workloads, and building an ML-driven autoscaling framework for VMs in cloud environments.
+                        Software Engineer with internship experience at <strong>PickMe</strong>. Proven expertise in designing
+                        complex systems including a three-layer image forensics system and benchmarked distributed message brokers
+                        for peak-load passenger handling. Built ML-driven auto-scaling framework for VMs in cloud reducing energy
+                        consumption while meeting SLOs.
                     </p>
                     <p>
-                        Proficient in Go, CI/CD pipelines, and event-driven distributed systems to deliver secure, automated,
-                        and scalable solutions while meeting strict latency SLOs.
+                        Proficient in <strong>Java</strong>, <strong>Go</strong>, Docker, and containerized backend development.
                     </p>
                     <div className="about-stats">
                         <div className="stat-item">

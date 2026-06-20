@@ -5,23 +5,27 @@ const Skills = () => {
     const skillsData = [
         {
             category: "Languages & Frameworks",
-            items: ["Go", "Python", "Java (Spring Boot)", "React.js", "React Native"]
+            items: ["Java (Spring Boot)", "Go", "Python", "React.js", "React Native"]
         },
         {
             category: "Backend & Distributed Systems",
-            items: ["Apache Kafka", "Redis", "RabbitMQ", "ETCD", "MySQL", "RESTful APIs"]
+            items: ["Kafka", "Redis", "RabbitMQ", "MCP", "ETCD", "MySQL", "REST API"]
         },
         {
             category: "DevOps & Infrastructure",
-            items: ["Docker", "Kubernetes GKE", "GitHub Actions (CI/CD)", "Gitlab CI", "Linux"]
+            items: ["Docker", "Kubernetes (GKE, Minikube)", "Git", "GitHub Actions (CI/CD)"]
         },
         {
-            category: "Observability & Testing",
-            items: ["Kibana", "SonarQube", "Serenity BDD"]
+            category: "Testing & Analysis",
+            items: ["Serenity BDD", "Kibana", "SonarQube"]
         },
         {
             category: "ML & Data",
             items: ["PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"]
+        },
+        {
+            category: "Concepts",
+            items: ["Data Structures & Algorithms", "OOP", "SOLID", "Design Patterns", "Microservices Architecture"]
         }
     ];
 
