@@ -26,7 +26,7 @@ const Education = () => {
                                     </div>
                                 </div>
                                 {/* <div className="edu-details">
-                                    <p className="edu-result">CGPA: <span className="highlight">3.45/4.0</span></p>
+                                    <p className="edu-result">CGPA: <span className="highlight">3.55/4.0</span></p>
                                 </div> */}
                             </div>
                         </div>

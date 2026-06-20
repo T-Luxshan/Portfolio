@@ -2,7 +2,10 @@ import React from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import { SiLetterboxd } from 'react-icons/si';
 import profileImg from '../assets/images/profile.jpg';
-import resumePdf from '../../Luxshan_Thuraisingam_SE.pdf';
+import profileImg2 from '../assets/images/profile2.jpeg';
+import profileImg3 from '../assets/images/profile3.jpeg';
+import profileImg4 from '../assets/images/profile4.jpeg';
+import resumePdf from '../../Luxshan Thuraisingam-SE.pdf';
 import './Hero.css';
 
 const Hero = () => {
@@ -57,7 +60,7 @@ const Hero = () => {
 
         <div className="hero-image-wrapper">
           <div className="hero-image-glass">
-            <img src={profileImg} alt="Luxshan Thuraisingam" className="hero-image" />
+            <img src={profileImg2} alt="Luxshan Thuraisingam" className="hero-image" />
           </div>
         </div>
       </div>
