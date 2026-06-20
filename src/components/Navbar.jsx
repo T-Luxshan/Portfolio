@@ -23,6 +23,20 @@ const Navbar = () => {
         { name: 'Contact', href: '#contact' },
     ];
 
+    const handleNavClick = (e, href) => {
+        e.preventDefault();
+        const targetId = href.replace('#', '');
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        const navbarEl = e.target.closest('nav');
+        const navbarHeight = navbarEl ? navbarEl.offsetHeight : 80;
+        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        setMenuOpen(false);
+    };
+
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container navbar-container">
@@ -38,7 +52,7 @@ const Navbar = () => {
                             key={link.name}
                             href={link.href}
                             className="nav-link"
-                            onClick={() => setMenuOpen(false)}
+                            onClick={(e) => handleNavClick(e, link.href)}
                         >
                             {link.name}
                         </a>
