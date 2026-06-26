@@ -14,6 +14,7 @@ const Navbar = () => {
         { name: 'Education', href: '#education', id: 'education' },
         { name: 'Research', href: '#research', id: 'research' },
         { name: 'Projects', href: '#projects', id: 'projects' },
+        { name: 'Certifications', href: '#certifications', id: 'certifications' },
         { name: 'Contact', href: '#contact', id: 'contact' },
     ];
 
