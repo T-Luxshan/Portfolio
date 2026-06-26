@@ -116,17 +116,30 @@
 }
 
 .hero-contact-info {
-    margin-top: 2rem;
-    display: flex;
-    gap: 4rem;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
 }
 
 .contact-info-item {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.contact-info-item--email {
+    grid-column: 1 / -1;
+}
+
+.contact-info-item--email .info-value {
+    white-space: nowrap;
 }
 
 .info-label {
@@ -138,9 +151,10 @@
 }
 
 .info-value {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .info-value:hover {
@@ -171,8 +185,17 @@
     }
 
     .hero-contact-info {
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
+        grid-template-columns: 1fr;
+        row-gap: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-info-item--email {
+        grid-column: auto;
+    }
+
+    .contact-info-item--email .info-value,
+    .info-value {
+        white-space: normal;
     }
 }

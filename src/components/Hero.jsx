@@ -49,6 +49,10 @@ const Hero = () => {
               <a href="mailto:luxshan.thuraisingam@gmail.com" className="info-value">luxshan.thuraisingam@gmail.com</a>
             </div>
             <div className="contact-info-item">
+              <span className="info-label">Mobile</span>
+              <a href="tel:+94764541834" className="info-value">+94 76 454 1834</a>
+            </div>
+            <div className="contact-info-item">
               <span className="info-label">Location</span>
               <span className="info-value">Colombo, Sri Lanka</span>
             </div>

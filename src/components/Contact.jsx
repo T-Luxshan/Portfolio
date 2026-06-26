@@ -9,7 +9,7 @@ const Contact = () => {
                 <div className="contact-header">
                     <h2 className="section-title">Get In Touch</h2>
                     <p className="contact-text">
-                        I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
+                        If you feel, I am your guy. Whether you have a question or just want to say hi,
                         feel free to reach out!
                     </p>
                     <a href="mailto:luxshan.thuraisingam@gmail.com" className="btn btn-primary contact-email-btn">
