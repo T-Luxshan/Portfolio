@@ -2,27 +2,17 @@
     background-color: var(--bg-dark);
 }
 
-.certifications-list {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0.5rem 0;
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 0.75rem;
 }
 
-.certification-item {
+.certification-card {
     display: flex;
     align-items: flex-start;
-    gap: 1.25rem;
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid var(--glass-border);
-    transition: background-color 0.2s ease;
-}
-
-.certification-item:last-child {
-    border-bottom: none;
-}
-
-.certification-item:hover {
-    background-color: rgba(23, 76, 110, 0.12);
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
 }
 
 .certification-icon-wrapper {
@@ -34,7 +24,7 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-top: 0.15rem;
+    margin-top: 0.1rem;
 }
 
 .certification-icon {
@@ -48,11 +38,11 @@
 }
 
 .certification-course {
-    font-size: var(--font-card-heading);
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.4;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
 }
 
 .certification-meta {
@@ -60,7 +50,7 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.5;
 }
 
@@ -80,16 +70,20 @@
 }
 
 @media (max-width: 768px) {
-    .certification-item {
-        padding: 1.25rem 1.5rem;
-        gap: 1rem;
+    .certifications-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .certification-card {
+        padding: 1.15rem 1.25rem;
     }
 
     .certification-course {
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
 
     .certification-meta {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }

@@ -5,7 +5,7 @@ import './Certifications.css';
 const Certifications = () => {
     const certifications = [
         { course: 'Learning Kubernetes', provider: 'LinkedIn Learning', date: 'June 2025' },
-        { course: 'Java 17: First', provider: 'LinkedIn Learning', date: 'Nov 2021' },
+        { course: 'Java 17: First Look', provider: 'LinkedIn Learning', date: 'Nov 2021' },
         { course: 'Programming Foundations: Databases', provider: 'LinkedIn Learning', date: 'Oct 2021' },
         { course: 'Learning SQL Programming', provider: 'LinkedIn Learning', date: 'Oct 2021' },
         { course: 'Meta - Version Control', provider: 'Coursera', date: 'Apr 2023' },
@@ -14,15 +14,17 @@ const Certifications = () => {
         { course: 'Python & Data Visualization', provider: 'DevTown', date: 'Oct 2021' },
         { course: 'Introduction to UI-UX', provider: 'Great Learning', date: 'Aug 2021' },
         { course: 'CYBERHAT 1.0', provider: 'IEEE Computer Society of SLTC', date: 'Jan 2021' },
+        { course: 'Python OOP with Exercises & Projects', provider: 'Udemy', date: 'Nov 2021' },
+        { course: 'Global Cultural Jamboree Participation Certificate', provider: 'Sri Lanka Scout Association', date: 'Jul 2021' },
     ];
 
     return (
         <section id="certifications" className="certifications-section content-section">
             <div className="container">
                 <h2 className="section-title">Certifications</h2>
-                <div className="glass-panel certifications-list">
+                <div className="certifications-grid">
                     {certifications.map((cert, index) => (
-                        <div key={index} className="certification-item">
+                        <div key={index} className="glass-panel certification-card">
                             <div className="certification-icon-wrapper">
                                 <FaCertificate className="certification-icon" />
                             </div>
