@@ -1,13 +1,9 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import { SiLetterboxd } from 'react-icons/si';
-import profileImg from '../assets/images/profile.jpg';
 import profileImg2 from '../assets/images/profile2.jpeg';
-import profileImg3 from '../assets/images/profile3.jpeg';
-import profileImg4 from '../assets/images/profile4.jpeg';
+import { RESUME_URL } from '../constants';
 import './Hero.css';
-
-const RESUME_URL = 'https://drive.google.com/file/d/1UeVcMIx-_vmIfQsX4cwf_S2KKsROKe7h/view?usp=sharing';
 
 const Hero = () => {
   return (

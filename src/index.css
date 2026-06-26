@@ -2,18 +2,24 @@
   /* Brand Colors from CV */
   --primary-dark: #0e2f44;
   --secondary-dark: #174c6e;
-  
+
   /* Modern Dark Palette */
   --bg-dark: #0f172a;
   --bg-darker: #020617;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
-  --accent: #38bdf8; /* Sky blue accent */
-  
+  --accent: #38bdf8;
+
   /* Glassmorphism */
   --glass-bg: rgba(30, 41, 59, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Typography */
+  --font-body: 1rem;
+  --font-card-heading: 1.25rem;
+  --font-section-title: 2rem;
+  --font-meta: 0.875rem;
 }
 
 html {
@@ -28,16 +34,17 @@ html {
 
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: var(--font-body);
   background-color: var(--bg-dark);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 a:hover {
@@ -62,17 +69,28 @@ ul {
   border: 1px solid var(--glass-border);
   border-radius: 16px;
   box-shadow: var(--glass-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.card-accent-left {
+  border-left: 3px solid var(--secondary-dark);
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: var(--font-section-title);
   font-weight: 700;
-  margin-bottom: 2rem;
-  background: linear-gradient(to right, #f8fafc, #94a3b8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.content-section {
+  padding: 5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .btn {
@@ -80,8 +98,9 @@ ul {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
   border: none;
 }
 
@@ -91,6 +110,40 @@ ul {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+  color: var(--bg-darker);
+}
+
+.btn-outline {
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent);
+}
+
+.meta-text {
+  font-size: var(--font-meta);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.tech-tag {
+  font-size: 0.875rem;
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-weight: 500;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(56, 189, 248, 0.18);
 }

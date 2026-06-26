@@ -1,5 +1,4 @@
 .about-section {
-    padding: 6rem 0;
     background-color: var(--bg-dark);
 }
 
@@ -10,7 +9,7 @@
 }
 
 .about-content p {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
     line-height: 1.8;
@@ -20,7 +19,7 @@
     display: flex;
     justify-content: center;
     gap: 4rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     border-top: 1px solid var(--glass-border);
     padding-top: 2rem;
 }
@@ -31,16 +30,16 @@
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
     color: var(--accent);
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: var(--font-meta);
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.06em;
 }
 
 @media (max-width: 768px) {

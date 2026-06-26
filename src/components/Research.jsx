@@ -19,7 +19,7 @@ const Research = () => {
     ];
 
     return (
-        <section id="research" className="research-section">
+        <section id="research" className="research-section content-section">
             <div className="container">
                 <h2 className="section-title">Research</h2>
                 <div className="research-list">

@@ -1,5 +1,4 @@
 .skills-section {
-    padding: 6rem 0;
     background-color: var(--bg-darker);
 }
 
@@ -11,15 +10,10 @@
 
 .skill-card {
     padding: 2rem;
-    transition: transform 0.3s ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-5px);
 }
 
 .skill-category {
-    font-size: 1.25rem;
+    font-size: var(--font-card-heading);
     color: var(--text-primary);
     margin-bottom: 1.5rem;
     position: relative;
@@ -33,7 +27,7 @@
     left: 0;
     width: 40px;
     height: 3px;
-    background: var(--accent);
+    background: var(--secondary-dark);
     border-radius: 2px;
 }
 
@@ -44,17 +38,17 @@
 }
 
 .skill-tag {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--accent);
+    background: rgba(23, 76, 110, 0.35);
+    color: var(--text-primary);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 500;
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .skill-tag:hover {
-    background: rgba(56, 189, 248, 0.2);
-    transform: scale(1.05);
+    background: rgba(23, 76, 110, 0.55);
+    border-color: rgba(56, 189, 248, 0.25);
 }

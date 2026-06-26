@@ -1,5 +1,4 @@
 .experience-section {
-    padding: 6rem 0;
     background-color: var(--bg-dark);
 }
 
@@ -8,7 +7,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding-left: 30px;
-    border-left: 2px solid var(--glass-border);
+    border-left: 2px solid var(--secondary-dark);
 }
 
 .timeline-item {
@@ -18,14 +17,14 @@
 
 .timeline-dot {
     position: absolute;
-    left: -39px;
-    /* Adjust based on border/padding */
+    left: -37px;
     top: 24px;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     background: var(--accent);
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    border: 2px solid var(--bg-dark);
+    box-shadow: 0 0 0 2px var(--secondary-dark);
 }
 
 .timeline-content {
@@ -38,23 +37,25 @@
 }
 
 .timeline-header h3 {
-    font-size: 1.5rem;
+    font-size: var(--font-card-heading);
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .company {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--accent);
     font-weight: 600;
     margin-bottom: 0.25rem;
 }
 
 .duration {
-    font-size: 0.9rem;
+    font-size: var(--font-meta);
     color: var(--text-secondary);
     font-style: italic;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .timeline-details {
@@ -73,7 +74,7 @@
     }
 
     .timeline-dot {
-        left: -29px;
+        left: -27px;
     }
 
     .timeline-content {
