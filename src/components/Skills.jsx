@@ -9,19 +9,19 @@ const Skills = () => {
         },
         {
             category: "Backend & Distributed Systems",
-            items: ["Kafka", "Redis", "RabbitMQ", "MCP", "ETCD", "MySQL", "REST API"]
+            items: ["Kafka", "Redis", "RabbitMQ", "ETCD", "MySQL", "REST API"]
         },
         {
             category: "DevOps & Infrastructure",
             items: ["Docker", "Kubernetes (GKE, Minikube)", "Git", "GitHub Actions (CI/CD)"]
         },
         {
-            category: "Testing & Analysis",
-            items: ["Serenity BDD", "Kibana", "SonarQube"]
+            category: "AI & ML",
+            items: ["Agentic coding", "MPC", "LLM Integration", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy"]
         },
         {
-            category: "ML & Data",
-            items: ["PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"]
+            category: "Testing & Analysis",
+            items: ["Serenity BDD", "Kibana", "SonarQube"]
         },
         {
             category: "Concepts",

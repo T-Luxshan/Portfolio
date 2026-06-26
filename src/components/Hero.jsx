@@ -5,8 +5,9 @@ import profileImg from '../assets/images/profile.jpg';
 import profileImg2 from '../assets/images/profile2.jpeg';
 import profileImg3 from '../assets/images/profile3.jpeg';
 import profileImg4 from '../assets/images/profile4.jpeg';
-import resumePdf from '../../Luxshan Thuraisingam-SE.pdf';
 import './Hero.css';
+
+const RESUME_URL = 'https://drive.google.com/file/d/1UeVcMIx-_vmIfQsX4cwf_S2KKsROKe7h/view?usp=sharing';
 
 const Hero = () => {
   return (
@@ -21,7 +22,7 @@ const Hero = () => {
 
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View Projects</a>
-            <a href={resumePdf} download="Luxshan_Thuraisingam_Resume.pdf" className="btn btn-outline">Download Resume</a>
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">View Resume</a>
             <a href="#contact" className="btn btn-outline">Contact Me</a>
           </div>
 

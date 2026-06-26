@@ -1,32 +1,39 @@
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import './Projects.css';
 
 const Projects = () => {
     const projects = [
         {
-            title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
-            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built an ML surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
-            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"],
-            link: "#"
-        },
-        {
-            title: "Message Broker Benchmarking System",
-            description: "Personal R&D Project (Ongoing). Developing a Go-based benchmarking framework to evaluate distributed message brokers under high-concurrency workloads. Implementing multi-producer/multi-consumer simulations to measure throughput, latency, and reliability across Kafka, RabbitMQ, and Redis-based queues.",
-            technologies: ["Golang", "Kafka", "RabbitMQ", "Redis", "Docker"],
-            link: "https://github.com/T-Luxshan/message-broker-benchmark.git"
-        },
-        {
             title: "LabourLINK (Labour Hiring System)",
-            description: "2nd Year Group Project — Client: AlphaCodes (Pvt) Ltd. Developed map-integrated on-demand labor hiring web and mobile apps with real-time communication. Team Leader & Full-Stack Developer: implemented authentication & session management (Spring Security + JWT), OTP-based password reset, profile, bookings, review, rating, and reporting functionalities.",
-            technologies: ["React.js", "React Native", "Spring Boot", "MySQL"],
+            description: "2nd Year Group Project — Client: AlphaCodes (Pvt) Ltd. Led a team of 4 to deliver map-integrated on-demand labor hiring web and mobile apps with real-time communication. Implemented authentication using Spring Security and JWT, OTP-based password reset with JavaMailSender, and RESTful APIs for profile management, bookings, reviews, ratings, and reporting.",
+            technologies: ["React.js", "React Native", "Java (Spring Boot)", "MySQL"],
             link: "https://github.com/T-Luxshan?tab=repositories&q=LabourLink"
         },
         {
+            title: "ai-native-website-audit",
+            description: "Personal Project — AI Native development. Scraped webpage metrics (headings, CTAs, links, alt text, meta tags) and integrated Google Gemini LLM to generate grounded, data-driven SEO and UX insights. Engineered structured prompts with JSON schema output and maintained prompt logs. Utilized agentic coding tools (Cursor) to accelerate development and focus effort on AI prompt design.",
+            technologies: ["Python", "FastAPI", "BeautifulSoup4", "React", "Google Gemini API"],
+            link: "https://github.com/T-Luxshan/ai-native-website-audit.git",
+            liveLink: "https://ai-native-website-audit.vercel.app/"
+        },
+        {
+            title: "Message Broker Benchmarking System",
+            description: "Personal Project (Ongoing). Developing a Go-based benchmarking framework to evaluate distributed message brokers under high-concurrency workloads. Implementing multi-producer/multi-consumer simulations to measure throughput, latency, and reliability across Kafka, RabbitMQ, and Redis-based queues.",
+            technologies: ["Golang", "Apache Kafka", "Redis", "RabbitMQ", "Docker"],
+            link: "https://github.com/T-Luxshan/message-broker-benchmark.git"
+        },
+        {
             title: "LinkNestSocialMedia",
-            description: "Full-stack social media application built on a microservices architecture, supporting posts, likes, and profile management. Implemented JWT-based authentication and secure password reset. Set up CI/CD pipelines with GitHub Actions, including automated JUnit testing and Dockerized deployment.",
+            description: "Individual Project. Built a full-stack social media application on a microservices architecture, supporting posts, likes, and profile management. Implemented JWT-based authentication and secure password reset using JavaMailSender. Set up CI/CD pipelines with GitHub Actions, including automated JUnit testing and Dockerized deployment.",
             technologies: ["React.js", "Spring Boot", "MySQL", "Docker", "GitHub Actions"],
             link: "https://github.com/T-Luxshan/SurgeGlobalSocialMedia.git"
+        },
+        {
+            title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
+            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
+            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"],
+            link: "#"
         },
         {
             title: "Distributed Queue Evaluation",
@@ -56,6 +63,11 @@ const Projects = () => {
                                 {project.link !== "#" && (
                                     <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
                                         <FaGithub /> View Code
+                                    </a>
+                                )}
+                                {project.liveLink && (
+                                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link">
+                                        <FaExternalLinkAlt /> Live Demo
                                     </a>
                                 )}
                             </div>
