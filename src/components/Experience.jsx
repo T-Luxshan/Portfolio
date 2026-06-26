@@ -14,7 +14,7 @@ const Experience = () => {
                             <div className="timeline-header">
                                 <h3>Software Engineer Intern</h3>
                                 <span className="company">PickMe (Digital Mobility Solutions Lanka PLC)</span>
-                                <span className="duration">Mar 2025 -- Sep 2025</span>
+                                <span className="duration">Mar 2025 - Sep 2025</span>
                             </div>
                             <ul className="timeline-details">
                                 <li>Developed <strong>RESTful API</strong> endpoints for QR payment workflow and built React Native components for operational demo application.</li>

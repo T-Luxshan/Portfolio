@@ -9,7 +9,7 @@ const Contact = () => {
                 <div className="contact-header">
                     <h2 className="section-title">Get In Touch</h2>
                     <p className="contact-text">
-                        If you feel, I am your guy. Whether you have a question or just want to say hi,
+                        If you feel, I am your guy. Whether you have a question or just want to say Hi,
                         feel free to reach out!
                     </p>
                     <a href="mailto:luxshan.thuraisingam@gmail.com" className="btn btn-primary contact-email-btn">
@@ -36,7 +36,7 @@ const Contact = () => {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>&copy; {new Date().getFullYear()} Luxshan Thuraisingam · Built with React</p>
+                    <p>&copy; {new Date().getFullYear()} Luxshan Thuraisingam · Built with Hope : )</p>
                 </div>
             </div>
         </footer>

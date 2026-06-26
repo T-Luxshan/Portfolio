@@ -19,7 +19,7 @@ const Education = () => {
                                 <h4 className="degree-title">B.Sc. (Hons) in Information Technology</h4>
                                 <div className="edu-meta">
                                     <div className="meta-item">
-                                        <FaCalendarAlt /> <span>2022 -- 2026</span>
+                                        <FaCalendarAlt /> <span>2022 - 2026</span>
                                     </div>
                                     <div className="meta-item">
                                         <FaMapMarkerAlt /> <span>Colombo, Sri Lanka</span>

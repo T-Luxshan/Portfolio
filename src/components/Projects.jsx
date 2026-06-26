@@ -6,7 +6,7 @@ const Projects = () => {
     const projects = [
         {
             type: "Group Project",
-            title: "LabourLINK (Labour Hiring System)",
+            title: "LabourLINK - A Labour Hiring Platform",
             description: "2nd Year Group Project — Client: AlphaCodes (Pvt) Ltd. Led a team of 4 to deliver map-integrated on-demand labor hiring web and mobile apps with real-time communication. Implemented authentication using Spring Security and JWT, OTP-based password reset with JavaMailSender, and RESTful APIs for profile management, bookings, reviews, ratings, and reporting.",
             technologies: ["React.js", "React Native", "Java (Spring Boot)", "MySQL"],
             link: "https://github.com/T-Luxshan?tab=repositories&q=LabourLink"
@@ -34,18 +34,18 @@ const Projects = () => {
             link: "https://github.com/T-Luxshan/SurgeGlobalSocialMedia.git"
         },
         {
-            type: "Research",
-            title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
-            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
-            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"],
-            link: "#"
-        },
-        {
             type: "Personal R&D",
             title: "Distributed Queue Evaluation",
             description: "Implemented and benchmarked multiple distributed queue technologies to evaluate and compare their performance characteristics. Simulated high-concurrency scenarios with workloads ranging from 10 to 100,000 requests, analyzing throughput and latency metrics across repeated benchmark runs.",
             technologies: ["Golang", "Redis", "RabbitMQ", "Docker"],
             link: "https://github.com/T-Luxshan/distributed-queue-evaluation.git"
+        },
+        {
+            type: "Research",
+            title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
+            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
+            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebook"],
+            link: "#"
         }
     ];
 

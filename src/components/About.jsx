@@ -10,7 +10,7 @@ const About = () => {
                     <p>
                         Software Engineer with internship experience at <strong>PickMe</strong>. Proven expertise in designing
                         complex systems including a three-layer image forensics system and benchmarked distributed message brokers
-                        for peak-load passenger handling. Built ML-driven auto-scaling framework for VMs in cloud reducing energy
+                        for peak load passenger handling. Built ML-driven auto-scaling framework for VMs in cloud reducing energy
                         consumption while meeting SLOs.
                     </p>
                     <p>
@@ -18,7 +18,7 @@ const About = () => {
                     </p>
                     <div className="about-stats">
                         <div className="stat-item">
-                            <span className="stat-number">3+</span>
+                            <span className="stat-number">4+</span>
                             <span className="stat-label">Years Coding</span>
                         </div>
                         <div className="stat-item">

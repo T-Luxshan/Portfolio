@@ -13,7 +13,7 @@ const Hero = () => {
           <h1 className="hero-name">Luxshan Thuraisingam</h1>
           <h2 className="hero-title">Software Engineer</h2>
           <p className="hero-description">
-            Focused on building reliable backend systems and clean full-stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
+            Focused on building reliable backend systems and clean full stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
           </p>
 
           <div className="hero-actions">
@@ -54,7 +54,7 @@ const Hero = () => {
             </div>
             <div className="contact-info-item">
               <span className="info-label">Location</span>
-              <span className="info-value">Colombo, Sri Lanka</span>
+              <span className="info-value">Jaffna, Sri Lanka</span>
             </div>
           </div>
         </div>

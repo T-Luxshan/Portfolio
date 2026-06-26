@@ -25,7 +25,7 @@ const Skills = () => {
         },
         {
             category: "Concepts",
-            items: ["Data Structures & Algorithms", "OOP", "SOLID", "Design Patterns", "Microservices Architecture"]
+            items: ["Data Structures & Algorithms", "OOP", "SOLID Principles", "Design Patterns", "Microservices Architecture"]
         }
     ];
 
