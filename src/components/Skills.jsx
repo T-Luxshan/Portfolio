@@ -9,28 +9,28 @@ const Skills = () => {
         },
         {
             category: "Backend & Distributed Systems",
-            items: ["Kafka", "Redis", "RabbitMQ", "MCP", "ETCD", "MySQL", "REST API"]
+            items: ["Kafka", "Redis", "RabbitMQ", "ETCD", "MySQL", "REST API"]
         },
         {
             category: "DevOps & Infrastructure",
             items: ["Docker", "Kubernetes (GKE, Minikube)", "Git", "GitHub Actions (CI/CD)"]
         },
         {
+            category: "AI & ML",
+            items: ["Agentic coding", "MPC", "LLM Integration", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy"]
+        },
+        {
             category: "Testing & Analysis",
             items: ["Serenity BDD", "Kibana", "SonarQube"]
         },
         {
-            category: "ML & Data",
-            items: ["PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"]
-        },
-        {
             category: "Concepts",
-            items: ["Data Structures & Algorithms", "OOP", "SOLID", "Design Patterns", "Microservices Architecture"]
+            items: ["Data Structures & Algorithms", "OOP", "SOLID Principles", "Design Patterns", "Microservices Architecture"]
         }
     ];
 
     return (
-        <section id="skills" className="skills-section">
+        <section id="skills" className="skills-section content-section">
             <div className="container">
                 <h2 className="section-title">Technical Skills</h2>
                 <div className="skills-grid">

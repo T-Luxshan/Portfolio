@@ -1,6 +1,5 @@
 .research-section {
-    padding: 6rem 0;
-    background-color: var(--bg-darker);
+    background-color: var(--bg-dark);
 }
 
 .research-list {
@@ -13,12 +12,6 @@
 
 .research-card {
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.research-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
 .research-card-header {
@@ -31,7 +24,7 @@
 .research-icon-wrapper {
     width: 40px;
     height: 40px;
-    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    background: rgba(23, 76, 110, 0.5);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -52,9 +45,9 @@
 
 .research-status {
     display: inline-block;
-    background: rgba(56, 189, 248, 0.15);
+    background: rgba(56, 189, 248, 0.1);
     color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(56, 189, 248, 0.25);
     padding: 0.2rem 0.7rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -63,13 +56,15 @@
 }
 
 .research-type {
-    font-size: 0.85rem;
+    font-size: var(--font-meta);
     color: var(--text-secondary);
     font-style: italic;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 .research-title {
-    font-size: 1.2rem;
+    font-size: var(--font-card-heading);
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.5;
@@ -84,12 +79,12 @@
 }
 
 .research-tech-tag {
-    background: rgba(14, 47, 68, 0.6);
-    color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    padding: 0.25rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.78rem;
+    background: rgba(23, 76, 110, 0.35);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
@@ -112,20 +107,14 @@
     color: var(--accent);
     font-weight: 600;
     font-size: 0.9rem;
-    transition: gap 0.2s ease;
 }
 
 .research-link:hover {
-    gap: 0.75rem;
     color: var(--accent);
 }
 
 @media (max-width: 768px) {
     .research-card {
         padding: 1.5rem;
-    }
-
-    .research-title {
-        font-size: 1.05rem;
     }
 }

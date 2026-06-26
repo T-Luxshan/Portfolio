@@ -5,10 +5,8 @@
     position: relative;
     overflow: hidden;
     padding-top: 80px;
-    /* Space for fixed navbar */
 }
 
-/* Background gradient effect */
 .hero-section::before {
     content: '';
     position: absolute;
@@ -16,7 +14,7 @@
     left: -10%;
     width: 50%;
     height: 50%;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0) 70%);
     filter: blur(80px);
     z-index: -1;
 }
@@ -28,7 +26,7 @@
     right: -5%;
     width: 40%;
     height: 40%;
-    background: radial-gradient(circle, rgba(23, 76, 110, 0.3) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(circle, rgba(23, 76, 110, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
     filter: blur(80px);
     z-index: -1;
 }
@@ -47,17 +45,14 @@
 }
 
 .hero-name {
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 1.1;
     font-weight: 800;
-    background: linear-gradient(to right, #ffffff, #94a3b8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text-primary);
 }
 
 .hero-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     color: var(--accent);
     font-weight: 500;
 }
@@ -70,36 +65,25 @@
 
 .hero-actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-top: 1rem;
-}
-
-.btn-outline {
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    background: transparent;
-}
-
-.btn-outline:hover {
-    background: rgba(56, 189, 248, 0.1);
-    transform: translateY(-2px);
+    margin-top: 0.5rem;
 }
 
 .social-links {
     display: flex;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .social-links a {
     font-size: 1.5rem;
     color: var(--text-secondary);
+    transition: color 0.2s ease;
 }
 
 .social-links a:hover {
     color: var(--accent);
-    transform: translateY(-3px);
-    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .hero-image-wrapper {
@@ -111,17 +95,17 @@
 .hero-image-glass {
     position: relative;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(23, 76, 110, 0.15);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transform: rotate(3deg);
-    transition: transform 0.5s ease;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-image-glass:hover {
-    transform: rotate(0deg) scale(1.05);
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
 }
 
 .hero-image {
@@ -131,13 +115,17 @@
     display: block;
 }
 
-
 .hero-contact-info {
-    margin-top: 3rem;
-    display: flex;
-    gap: 4rem;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 0.5rem;
+    row-gap: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
 }
 
 .contact-info-item {
@@ -146,18 +134,31 @@
     gap: 0.5rem;
 }
 
+.contact-info-item--email {
+    grid-column: 1 / -1;
+}
+
+.contact-info-item--email .info-value {
+    white-space: nowrap;
+}
+
 .info-label {
     font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.06em;
     color: var(--text-secondary);
     font-weight: 600;
 }
 
 .info-value {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--text-primary);
     font-weight: 500;
+    white-space: nowrap;
+}
+
+.info-value:hover {
+    color: var(--accent);
 }
 
 @media (max-width: 768px) {
@@ -172,7 +173,7 @@
     }
 
     .hero-name {
-        font-size: 3rem;
+        font-size: 2.75rem;
     }
 
     .hero-actions {
@@ -184,8 +185,17 @@
     }
 
     .hero-contact-info {
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
+        grid-template-columns: 1fr;
+        row-gap: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-info-item--email {
+        grid-column: auto;
+    }
+
+    .contact-info-item--email .info-value,
+    .info-value {
+        white-space: normal;
     }
 }

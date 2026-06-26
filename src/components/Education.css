@@ -1,14 +1,5 @@
 .education-section {
-    padding: 6rem 0;
-    background-color: var(--bg-primary);
-    /* Slightly lighter/different than adjacent sections if needed, or keeping consistent */
-}
-
-.education-container .section-title {
-    text-align: center;
-    margin-bottom: 4rem;
-    font-size: 2.5rem;
-    color: var(--text-primary);
+    background-color: var(--bg-darker);
 }
 
 .education-grid {
@@ -20,16 +11,16 @@
 }
 
 .education-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(23, 76, 110, 0.12);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 2rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .education-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 .education-header {
@@ -39,10 +30,10 @@
 }
 
 .edu-icon-wrapper {
-    background: rgba(100, 255, 218, 0.1);
+    background: rgba(23, 76, 110, 0.5);
     color: var(--accent);
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -51,7 +42,7 @@
 }
 
 .edu-icon {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
 }
 
 .edu-content {
@@ -59,13 +50,13 @@
 }
 
 .institution-name {
-    font-size: 1.4rem;
+    font-size: var(--font-card-heading);
     color: var(--text-primary);
     margin-bottom: 0.5rem;
 }
 
 .degree-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--accent);
     margin-bottom: 1rem;
     font-weight: 500;
@@ -120,12 +111,11 @@
     }
 
     .edu-icon-wrapper {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 0.5rem;
+        width: 48px;
+        height: 48px;
     }
 
     .edu-icon {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 }

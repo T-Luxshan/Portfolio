@@ -1,11 +1,8 @@
 import React from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaPhone, FaMedium, FaHackerrank } from 'react-icons/fa';
 import { SiLetterboxd } from 'react-icons/si';
-import profileImg from '../assets/images/profile.jpg';
 import profileImg2 from '../assets/images/profile2.jpeg';
-import profileImg3 from '../assets/images/profile3.jpeg';
-import profileImg4 from '../assets/images/profile4.jpeg';
-import resumePdf from '../../Luxshan Thuraisingam-SE.pdf';
+import { RESUME_URL } from '../constants';
 import './Hero.css';
 
 const Hero = () => {
@@ -16,12 +13,12 @@ const Hero = () => {
           <h1 className="hero-name">Luxshan Thuraisingam</h1>
           <h2 className="hero-title">Software Engineer</h2>
           <p className="hero-description">
-            Focused on building reliable backend systems and clean full-stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
+            Focused on building reliable backend systems and clean full stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
           </p>
 
           <div className="hero-actions">
             <a href="#projects" className="btn btn-primary">View Projects</a>
-            <a href={resumePdf} download="Luxshan_Thuraisingam_Resume.pdf" className="btn btn-outline">Download Resume</a>
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">View Resume</a>
             <a href="#contact" className="btn btn-outline">Contact Me</a>
           </div>
 
@@ -52,8 +49,12 @@ const Hero = () => {
               <a href="mailto:luxshan.thuraisingam@gmail.com" className="info-value">luxshan.thuraisingam@gmail.com</a>
             </div>
             <div className="contact-info-item">
+              <span className="info-label">Mobile</span>
+              <a href="tel:+94764541834" className="info-value">+94 76 454 1834</a>
+            </div>
+            <div className="contact-info-item">
               <span className="info-label">Location</span>
-              <span className="info-value">Colombo, Sri Lanka</span>
+              <span className="info-value">Jaffna, Sri Lanka</span>
             </div>
           </div>
         </div>

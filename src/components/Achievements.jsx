@@ -7,7 +7,7 @@ import cBadge from '../assets/images/badges/c-silver.png';
 
 const Achievements = () => {
     return (
-        <section id="achievements" className="achievements-section">
+        <section id="achievements" className="achievements-section content-section">
             <div className="container">
                 <h2 className="section-title">Achievements & Activities</h2>
 
@@ -51,7 +51,7 @@ const Achievements = () => {
                             <h4>AIESEC in Sri Lanka (2022 -- 2024)</h4>
                             <ul className="activity-details">
                                 <li>Digital Experience Team Member- Graphic designer <br />(Mar 2023 -- Sep 2023)</li>
-                                <li>Organizing Committee Member - External Relations, Lead CS 9.0 < br />(Nov 2022 -- Feb 2023)</li>
+                                <li>Organizing Committee Member - External Relations, Lead CS 9.0 <br />(Nov 2022 -- Feb 2023)</li>
                                 <li>OC Vice President - External Relations, Beauty Beyond Ceylon <br />(May 2022 -- Aug 2022)</li>
                                 <li>Information Management Team Member- Data Analyst <br />(Mar 2022 -- Sep 2022)</li>
                             </ul>
