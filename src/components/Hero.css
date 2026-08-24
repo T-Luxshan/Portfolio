@@ -235,7 +235,7 @@
 }
 
 /* Red rim light sweeping across the portrait */
-.hero-image-sweep {
+.hero0-image-sweep {
     position: absolute;
     inset: 0;
     pointer-events: none;
@@ -270,7 +270,7 @@
 }
 
 /* Web spun into the corner of the frame on hover */
-.hero-image-web {
+.hero0-image-web {
     position: absolute;
     top: 0;
     left: 0;
