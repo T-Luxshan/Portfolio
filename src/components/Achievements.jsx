@@ -24,7 +24,7 @@ const Achievements = () => {
     return (
         <section id="achievements" className="achievements-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title">Achievements & Activities</Reveal>
+                <Reveal as="h2" className="section-title" mask>Achievements &amp; Activities</Reveal>
 
                 <div className="achievements-grid">
                     <Reveal className="glass-panel achievements-column" variant="left">

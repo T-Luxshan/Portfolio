@@ -14,6 +14,10 @@
   --accent: var(--crimson);
   --accent-blue: var(--suit-blue);
 
+  /* Section veils: translucent so the city/web environment reads through */
+  --veil-dark: rgba(10, 15, 28, 0.74);
+  --veil-darker: rgba(5, 7, 13, 0.8);
+
   /* Glassmorphism */
   --glass-bg: rgba(16, 22, 40, 0.78);
   --glass-border: rgba(225, 29, 46, 0.18);
@@ -52,6 +56,11 @@ a {
   text-decoration: none;
   color: inherit;
   transition: color 0.2s ease;
+}
+
+:focus-visible {
+  outline: 2px solid var(--crimson);
+  outline-offset: 3px;
 }
 
 a:hover {
@@ -169,6 +178,29 @@ ul {
     transform var(--dur-fast) var(--ease-out-web);
 }
 
+/* Web strand that shoots across the button on approach */
+.btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  transition:
+    transform 260ms var(--ease-thwip),
+    opacity 260ms ease;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  transform: scaleX(1);
+  opacity: 0.7;
+}
+
 /* Ripple-style highlight that tracks the cursor */
 .btn::after {
   content: '';
@@ -190,8 +222,16 @@ ul {
   opacity: 1;
 }
 
+/* Press compresses the button and snaps the strand */
 .btn:active {
-  transform: translateY(0) scale(0.985);
+  transform: translateY(1px) scale(0.97);
+  transition-duration: 90ms;
+}
+
+.btn:active::before {
+  opacity: 0;
+  transform: scaleX(1.3);
+  transition-duration: 90ms;
 }
 
 .btn-primary {
@@ -217,13 +257,26 @@ ul {
   box-shadow: 0 8px 22px rgba(30, 111, 255, 0.28);
 }
 
-/* MagneticButton wraps .btn links; keep the magnet transform composed with hover lift */
+/*
+ * MagneticButton wraps .btn links. The magnet offset comes from useMagnetic as
+ * a custom property, so every hover/press state has to compose with it rather
+ * than replace it.
+ */
+.magnetic.btn {
+  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
+}
+
 .magnetic.btn:hover {
   transform: translate3d(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) - 2px), 0) scale(1.02);
 }
 
 .magnetic.btn:active {
-  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0) scale(0.985);
+  transform: translate3d(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) + 1px), 0) scale(0.97);
+}
+
+/* Glow strengthens as the cursor closes in, before it even arrives */
+.magnetic.btn-primary {
+  box-shadow: 0 0 calc(var(--proximity, 0) * 26px) rgba(225, 29, 46, calc(var(--proximity, 0) * 0.5));
 }
 
 .meta-text {
@@ -250,7 +303,8 @@ ul {
 }
 
 .tech-tag:hover {
-  background: rgba(30, 111, 255, 0.18);
-  border-color: rgba(225, 29, 46, 0.35);
-  transform: translateY(-2px) scale(1.04);
+  background: rgba(225, 29, 46, 0.16);
+  border-color: rgba(225, 29, 46, 0.5);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 14px rgba(225, 29, 46, 0.22);
 }

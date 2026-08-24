@@ -12,26 +12,32 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Intro from './components/Intro';
 import CursorFX from './components/CursorFX';
+import SpiderFX from './components/SpiderFX';
+import SwingFX from './components/SwingFX';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Intro />
+      <SpiderFX />
       <CursorFX />
-      <div className="atmosphere" aria-hidden="true" />
+      <SwingFX />
       <div className="atmosphere-vignette" aria-hidden="true" />
+
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Experience />
-      <Education />
-      <Research />
-      <Projects />
-      <Certifications />
-      <Achievements />
-      <Contact />
+      <main className="page-stage swing-blur">
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Education />
+        <Research />
+        <Projects />
+        <Certifications />
+        <Achievements />
+        <Contact />
+      </main>
     </div>
   );
 }

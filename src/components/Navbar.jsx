@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RESUME_URL } from '../constants';
-import usePointerTilt from '../hooks/usePointerTilt';
+import useMagnetic from '../hooks/useMagnetic';
+import { swingTo } from '../motion/swing';
 import './Navbar.css';
 
 const links = [
@@ -15,14 +16,14 @@ const links = [
 ];
 
 const NavLink = ({ link, isActive, onSelect }) => {
-    const ref = usePointerTilt({ maxTilt: 0, maxMagnet: 3 });
+    const ref = useMagnetic({ strength: 4, radius: 48 });
 
     return (
         <a
             ref={ref}
             href={link.href}
             className={`nav-link ${isActive ? 'active' : ''}`}
-            onClick={(e) => onSelect(e, link.href)}
+            onClick={(e) => onSelect(e, link.id)}
         >
             {link.name}
         </a>
@@ -86,17 +87,16 @@ const Navbar = () => {
         return () => observers.forEach((observer) => observer.disconnect());
     }, []);
 
-    const handleNavClick = (e, href) => {
+    // The web shoots from the navigation item that was clicked.
+    const handleNavClick = (e, targetId) => {
         e.preventDefault();
-        const targetId = href.replace('#', '');
-        const targetEl = document.getElementById(targetId);
-        if (!targetEl) return;
 
-        const navbarEl = e.target.closest('nav');
-        const navbarHeight = navbarEl ? navbarEl.offsetHeight : 80;
-        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        const rect = e.currentTarget.getBoundingClientRect();
+        swingTo(targetId, {
+            x: rect.left + rect.width / 2,
+            y: rect.bottom,
+        });
 
-        window.scrollTo({ top: targetTop, behavior: 'smooth' });
         setMenuOpen(false);
     };
 

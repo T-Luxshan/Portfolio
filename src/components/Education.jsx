@@ -7,10 +7,10 @@ const Education = () => {
     return (
         <section id="education" className="education-section content-section">
             <div className="container education-container">
-                <Reveal as="h2" className="section-title">Education</Reveal>
+                <Reveal as="h2" className="section-title" mask>Education</Reveal>
 
                 <div className="education-grid">
-                    <Reveal className="education-card" index={0}>
+                    <Reveal className="education-card" variant="drop" index={0}>
                         <div className="education-header">
                             <div className="edu-icon-wrapper">
                                 <FaGraduationCap className="edu-icon" />
@@ -33,7 +33,7 @@ const Education = () => {
                         </div>
                     </Reveal>
 
-                    <Reveal className="education-card" index={1}>
+                    <Reveal className="education-card" variant="drop" index={1}>
                         <div className="education-header">
                             <div className="edu-icon-wrapper">
                                 <FaGraduationCap className="edu-icon" />

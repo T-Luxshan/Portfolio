@@ -4,15 +4,48 @@ import { SiLetterboxd } from 'react-icons/si';
 import profileImg2 from '../assets/images/profile2.jpeg';
 import { RESUME_URL } from '../constants';
 import { usePointerParallax } from '../hooks/useParallax';
+import usePointerTilt from '../hooks/usePointerTilt';
+import useMagnetic from '../hooks/useMagnetic';
 import MagneticButton from './motion/MagneticButton';
 import './Hero.css';
 
+const SOCIALS = [
+  { href: 'https://github.com/T-Luxshan', label: 'GitHub', Icon: FaGithub },
+  { href: 'https://www.linkedin.com/in/luxshan-thuraisingam-b47264194/', label: 'LinkedIn', Icon: FaLinkedin },
+  { href: 'https://medium.com/@luxshan.thuraisingam', label: 'Medium', Icon: FaMedium },
+  { href: 'https://www.hackerrank.com/profile/luckybraveboys', label: 'HackerRank', Icon: FaHackerrank },
+  { href: 'https://letterboxd.com/luxshan/', label: 'Letterboxd', Icon: SiLetterboxd },
+  { href: 'tel:+94764541834', label: 'Phone', Icon: FaPhone },
+];
+
+const SocialIcon = ({ href, label, Icon, index }) => {
+  const ref = useMagnetic({ strength: 6, radius: 60 });
+  const isTel = href.startsWith('tel:');
+
+  return (
+    <a
+      ref={ref}
+      href={href}
+      target={isTel ? undefined : '_blank'}
+      rel={isTel ? undefined : 'noopener noreferrer'}
+      aria-label={label}
+      className="social-icon"
+      style={{ '--i': index }}
+    >
+      <Icon />
+    </a>
+  );
+};
+
 const Hero = () => {
   const webRef = usePointerParallax();
+  // The frame counter-tilts against the cursor, and its inner layers shift with it
+  const frameRef = usePointerTilt({ maxTiltX: 5, maxTiltY: 7, maxShift: 10 });
 
   return (
     <section id="hero" className="hero-section">
       <div className="hero-web" ref={webRef} aria-hidden="true" />
+
       <div className="container hero-container">
         <div className="hero-content">
           <h1 className="hero-name swing-in" style={{ '--i': 0 }}>Luxshan Thuraisingam</h1>
@@ -28,24 +61,9 @@ const Hero = () => {
           </div>
 
           <div className="social-links swing-in" style={{ '--i': 4 }}>
-            <a href="https://github.com/T-Luxshan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FaGithub />
-            </a>
-            <a href="https://www.linkedin.com/in/luxshan-thuraisingam-b47264194/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <FaLinkedin />
-            </a>
-            <a href="https://medium.com/@luxshan.thuraisingam" target="_blank" rel="noopener noreferrer" aria-label="Medium">
-              <FaMedium />
-            </a>
-            <a href="https://www.hackerrank.com/profile/luckybraveboys" target="_blank" rel="noopener noreferrer" aria-label="HackerRank">
-              <FaHackerrank />
-            </a>
-            <a href="https://letterboxd.com/luxshan/" target="_blank" rel="noopener noreferrer" aria-label="Letterboxd">
-              <SiLetterboxd />
-            </a>
-            <a href="tel:+94764541834" aria-label="Phone">
-              <FaPhone />
-            </a>
+            {SOCIALS.map((social, index) => (
+              <SocialIcon key={social.label} index={index} {...social} />
+            ))}
           </div>
 
           <div className="hero-contact-info swing-in" style={{ '--i': 5 }}>
@@ -65,8 +83,11 @@ const Hero = () => {
         </div>
 
         <div className="hero-image-wrapper swing-in" style={{ '--i': 2 }}>
-          <div className="hero-image-glass">
+          <div className="hero-image-glass" ref={frameRef}>
             <img src={profileImg2} alt="Luxshan Thuraisingam" className="hero-image" />
+            <span className="hero-image-halftone" aria-hidden="true" />
+            <span className="hero-image-sweep" aria-hidden="true" />
+            <span className="hero-image-web" aria-hidden="true" />
           </div>
         </div>
       </div>

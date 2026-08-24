@@ -7,15 +7,20 @@ import Reveal from './motion/Reveal';
 import './Projects.css';
 
 const ProjectCard = ({ project, index }) => {
-    const tiltRef = usePointerTilt({ maxTilt: 4 });
+    const tiltRef = usePointerTilt({ maxTiltX: 4, maxTiltY: 6, maxShift: 8 });
     const revealRef = useReveal();
 
     return (
         <div
             ref={mergeRefs(tiltRef, revealRef)}
-            className="glass-panel project-card card-accent-left reveal"
-            style={{ '--i': index % 3 }}
+            className="glass-panel project-card card-accent-left reveal reveal--throw"
+            style={{
+                '--i': index % 3,
+                // Alternate the spin so a row of cards doesn't land in lockstep
+                '--throw-spin': index % 2 ? '3.4deg' : '-3.4deg',
+            }}
         >
+            <span className="project-corner-web" aria-hidden="true" />
             <div className="project-content">
                 <span className="project-type">{project.type}</span>
                 <h3 className="project-title">{project.title}</h3>
@@ -38,6 +43,7 @@ const ProjectCard = ({ project, index }) => {
                     </a>
                 )}
             </div>
+            <span className="project-scanline" aria-hidden="true" />
         </div>
     );
 };
@@ -92,7 +98,7 @@ const Projects = () => {
     return (
         <section id="projects" className="projects-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title">Projects</Reveal>
+                <Reveal as="h2" className="section-title" mask>Projects</Reveal>
                 <div className="projects-grid">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />

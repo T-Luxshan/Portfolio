@@ -88,6 +88,24 @@
     box-shadow: 0 0 10px rgba(225, 29, 46, 0.7);
 }
 
+/* Web anchor: the active item pays a line down toward its section */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--crimson), transparent);
+    transform: translateX(-50%) scaleY(0);
+    transform-origin: top center;
+    transition: transform var(--dur-base) var(--ease-thwip);
+}
+
+.nav-link.active::before {
+    transform: translateX(-50%) scaleY(1);
+}
+
 /* Scroll progress rail along the bottom edge of the navbar */
 .nav-progress {
     position: absolute;

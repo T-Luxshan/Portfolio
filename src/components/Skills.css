@@ -1,15 +1,110 @@
 .skills-section {
-    background-color: var(--bg-darker);
+    background-color: var(--veil-darker);
+}
+
+.skills-network {
+    position: relative;
+}
+
+/* Strand layer sits behind the cards and spans the whole grid */
+.skills-web {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.skills-strand {
+    fill: none;
+    stroke: rgba(150, 175, 225, 0.22);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    transition: stroke var(--dur-base) ease, stroke-width var(--dur-base) ease, opacity var(--dur-base) ease;
+}
+
+.skills-network.has-active .skills-strand {
+    opacity: 0.25;
+}
+
+.skills-network.has-active .skills-strand.is-lit {
+    opacity: 1;
+    stroke: rgba(225, 29, 46, 0.85);
+    stroke-width: 1.6;
+    filter: drop-shadow(0 0 6px rgba(225, 29, 46, 0.55));
 }
 
 .skills-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
 
 .skill-card {
+    position: relative;
     padding: 2rem;
+    transition:
+        opacity var(--dur-base) var(--ease-out-web),
+        transform var(--dur-base) var(--ease-out-web),
+        border-color var(--dur-fast) ease,
+        box-shadow var(--dur-base) ease,
+        filter var(--dur-base) ease;
+}
+
+/* Node marker where the strands meet the card */
+.skill-node {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    border-radius: 50%;
+    background: var(--crimson);
+    box-shadow: 0 0 0 3px rgba(225, 29, 46, 0.16);
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-swing);
+}
+
+.skill-card.is-visible .skill-node {
+    opacity: 0.55;
+    transform: scale(1);
+}
+
+.skill-card.is-active .skill-node {
+    opacity: 1;
+    animation: node-pulse 1500ms var(--ease-out-web) infinite;
+}
+
+@keyframes node-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 14px rgba(225, 29, 46, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 46, 0);
+    }
+}
+
+/* Unrelated groups recede while one is focused */
+.skill-card.is-dimmed {
+    opacity: 0.42;
+    filter: saturate(0.6);
+}
+
+.skill-card.is-active.is-visible {
+    transform: translateY(-4px);
+    border-color: rgba(225, 29, 46, 0.5);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4), 0 0 26px rgba(225, 29, 46, 0.14);
 }
 
 .skill-category {
@@ -31,7 +126,7 @@
     border-radius: 2px;
     transform: scaleX(0);
     transform-origin: left center;
-    transition: transform var(--dur-slow) var(--ease-out-web);
+    transition: transform var(--dur-slow) var(--ease-out-web), width var(--dur-base) var(--ease-out-web);
     transition-delay: calc(var(--i, 0) * var(--stagger-step) + 120ms);
 }
 
@@ -39,7 +134,13 @@
     transform: scaleX(1);
 }
 
+.skill-card.is-active .skill-category::after {
+    width: 72px;
+    transition-delay: 0ms;
+}
+
 .skill-tags {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 0.8rem;
@@ -54,34 +155,54 @@
     font-weight: 500;
     border: 1px solid rgba(30, 111, 255, 0.3);
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(10px) scale(0.94);
     transition:
         background-color var(--dur-fast) ease,
         border-color var(--dur-fast) ease,
         opacity var(--dur-base) var(--ease-out-web),
-        transform var(--dur-base) var(--ease-swing);
+        transform var(--dur-base) var(--ease-swing),
+        box-shadow var(--dur-fast) ease;
     transition-delay: calc(var(--i, 0) * 45ms);
 }
 
 .skill-card.is-visible .skill-tag {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 .skill-card.is-visible .skill-tag:hover {
-    background: rgba(30, 111, 255, 0.18);
-    border-color: rgba(225, 29, 46, 0.5);
-    transform: translateY(-3px) scale(1.04);
+    background: rgba(225, 29, 46, 0.16);
+    border-color: rgba(225, 29, 46, 0.6);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(225, 29, 46, 0.25);
     transition-delay: 0ms;
 }
 
+@media (max-width: 768px) {
+
+    /* The strand geometry is built for a multi-column grid */
+    .skills-web {
+        display: none;
+    }
+
+    .skill-node {
+        display: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
-    .skill-tag {
+
+    .skill-tag,
+    .skill-node {
         opacity: 1;
         transform: none;
     }
 
     .skill-category::after {
         transform: scaleX(1);
+    }
+
+    .skill-card.is-active .skill-node {
+        animation: none;
     }
 }

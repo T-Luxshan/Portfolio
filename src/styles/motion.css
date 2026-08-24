@@ -1,16 +1,32 @@
 :root {
+  /* Easings, each mapped to a physical idea */
   --ease-out-web: cubic-bezier(0.16, 1, 0.3, 1);
+  /* entrance deceleration */
   --ease-swing: cubic-bezier(0.34, 1.4, 0.64, 1);
+  /* springy overshoot */
+  --ease-impact: cubic-bezier(0.2, 0.9, 0.1, 1);
+  /* fast then hard stop */
+  --ease-thwip: cubic-bezier(0.7, 0, 0.2, 1);
+  /* web shot: slow load, fast release */
+  --ease-drift: cubic-bezier(0.45, 0, 0.55, 1);
+  /* environmental in-out */
+
   --dur-fast: 180ms;
   --dur-base: 420ms;
   --dur-slow: 720ms;
+  --dur-cine: 1100ms;
+
   --reveal-shift: 24px;
   --stagger-step: 70ms;
-  --tilt-max: 4deg;
+  --tilt-max-x: 4deg;
+  --tilt-max-y: 6deg;
   --magnet-max: 6px;
 }
 
-/* Reveal primitive: fade + slide + blur-to-sharp, driven once by IntersectionObserver */
+/* ------------------------------------------------------------------ *
+ * Reveal primitive
+ * ------------------------------------------------------------------ */
+
 .reveal {
   opacity: 0;
   transform: translate3d(0, var(--reveal-shift), 0);
@@ -33,7 +49,6 @@
   transform: translate3d(0, 0, 0);
 }
 
-/* Opt-in blur-to-sharp. Kept off glass panels, which already composite a backdrop-filter. */
 .reveal--blur {
   filter: blur(6px);
 }
@@ -60,12 +75,159 @@
   transform: none;
 }
 
-/* Children stagger using their own --i index */
-.stagger-children > * {
-  transition-delay: calc(var(--i, 0) * var(--stagger-step));
+/* ------------------------------------------------------------------ *
+ * Keyframe reveals. These replace the transition on `.reveal` so each
+ * section can enter with its own physical character.
+ * ------------------------------------------------------------------ */
+
+/* Swing: attaches at the top corner and settles like a hanging web line */
+@keyframes swing-into-place {
+  0% {
+    opacity: 0;
+    transform: translate3d(-9%, -4%, 0) rotate(-3.2deg);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate3d(1.5%, 0, 0) rotate(0.9deg);
+  }
+
+  78% {
+    transform: translate3d(-0.4%, 0, 0) rotate(-0.3deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* Hero entrance: runs on mount rather than on scroll */
+/* Throw: hurled onto the screen, lands, absorbs the impact */
+@keyframes thrown-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 46px, 0) scale(0.9) rotate(var(--throw-spin, -4deg));
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate3d(0, -7px, 0) scale(1.015) rotate(calc(var(--throw-spin, -4deg) * -0.16));
+  }
+
+  80% {
+    transform: translate3d(0, 2px, 0) scale(0.997) rotate(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Landing: fast drop, hard stop, small secondary settle */
+@keyframes hero-landing {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -34px, 0) scale(1.03);
+  }
+
+  62% {
+    opacity: 1;
+    transform: translate3d(0, 5px, 0) scale(0.992);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Web-drop: line pays out from above, element hangs then steadies */
+@keyframes web-drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -30px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 6px, 0);
+  }
+
+  82% {
+    transform: translate3d(0, -2px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * `backwards` rather than `both` on purpose: once the entrance finishes the
+ * element must hand the transform back to its own rules, otherwise the retained
+ * animation value would outrank every hover and tilt style afterwards.
+ */
+.reveal--swing.is-visible {
+  animation: swing-into-place var(--dur-cine) var(--ease-swing) backwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+.reveal--throw.is-visible {
+  animation: thrown-in var(--dur-slow) var(--ease-impact) backwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+.reveal--land.is-visible {
+  animation: hero-landing var(--dur-slow) var(--ease-impact) backwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+.reveal--drop.is-visible {
+  animation: web-drop var(--dur-slow) var(--ease-swing) backwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+/* Keyframes own the transform, so clear the transition-based offset */
+.reveal--swing,
+.reveal--throw,
+.reveal--land,
+.reveal--drop {
+  opacity: 0;
+  transform: none;
+  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-base) ease;
+}
+
+/* ------------------------------------------------------------------ *
+ * Heading mask reveal + web underline
+ * ------------------------------------------------------------------ */
+
+@keyframes mask-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+.mask-reveal {
+  clip-path: inset(0 100% 0 0);
+}
+
+.mask-reveal.is-visible {
+  clip-path: inset(0 0 0 0);
+  animation: mask-wipe var(--dur-slow) var(--ease-thwip) backwards;
+}
+
+/* ------------------------------------------------------------------ *
+ * Hero entrance
+ * ------------------------------------------------------------------ */
+
 @keyframes swing-in {
   from {
     opacity: 0;
@@ -84,15 +246,103 @@
   animation-delay: calc(var(--i, 0) * var(--stagger-step));
 }
 
-/* Magnetic wrapper: translation written by usePointerTilt as custom properties */
+/* ------------------------------------------------------------------ *
+ * Magnetic elements. Translation comes from useMagnetic as custom
+ * properties, so hover styles must compose with it.
+ * ------------------------------------------------------------------ */
+
 .magnetic {
   display: inline-flex;
   transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
-  transition: transform var(--dur-fast) var(--ease-out-web);
+  transition: transform var(--dur-base) var(--ease-out-web);
 }
 
 .magnetic:active {
   transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0) scale(0.985);
+}
+
+/* ------------------------------------------------------------------ *
+ * Spider-sense: anticipation pulse for important elements
+ * ------------------------------------------------------------------ */
+
+/*
+ * The ring is drawn with outline rather than a pseudo-element or box-shadow:
+ * buttons already spend ::before on the web strand and ::after on the ripple,
+ * and box-shadow carries their glow.
+ */
+/* Hover only: declaring an outline in the resting state would replace the
+ * browser's keyboard focus ring. */
+.spider-sense:hover {
+  outline: 1px solid rgba(225, 29, 46, 0);
+  animation: sense-ring 1400ms var(--ease-out-web) infinite;
+}
+
+@keyframes sense-ring {
+  0% {
+    outline-color: rgba(225, 29, 46, 0.6);
+    outline-offset: 0;
+  }
+
+  70% {
+    outline-color: rgba(225, 29, 46, 0);
+    outline-offset: 11px;
+  }
+
+  100% {
+    outline-color: rgba(225, 29, 46, 0);
+    outline-offset: 11px;
+  }
+}
+
+/* Tight, precise twitch: spider movement, never a wobble */
+@keyframes sense-twitch {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(0.6px, -0.5px, 0);
+  }
+
+  60% {
+    transform: translate3d(-0.5px, 0.4px, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Web strand that draws itself (SVG stroke-dashoffset)
+ * ------------------------------------------------------------------ */
+
+.web-draw {
+  stroke-dasharray: var(--len, 400);
+  stroke-dashoffset: var(--len, 400);
+}
+
+.is-visible .web-draw,
+.web-draw.is-visible {
+  animation: web-draw-in var(--dur-cine) var(--ease-thwip) both;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+@keyframes web-draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Speed lines + motion blur during a web swing between sections
+ * ------------------------------------------------------------------ */
+
+.swing-blur {
+  will-change: filter, transform;
+  transition: filter 260ms var(--ease-drift), transform 260ms var(--ease-drift);
+}
+
+body.is-swinging .swing-blur {
+  filter: blur(1.6px) saturate(1.08);
+  transform: scale(1.006);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -100,9 +350,11 @@
     --dur-fast: 1ms;
     --dur-base: 1ms;
     --dur-slow: 1ms;
+    --dur-cine: 1ms;
     --reveal-shift: 0px;
     --stagger-step: 0ms;
-    --tilt-max: 0deg;
+    --tilt-max-x: 0deg;
+    --tilt-max-y: 0deg;
     --magnet-max: 0px;
   }
 
@@ -110,15 +362,39 @@
   .reveal--left,
   .reveal--right,
   .reveal--scale,
-  .reveal--blur {
+  .reveal--blur,
+  .reveal--swing,
+  .reveal--throw,
+  .reveal--land,
+  .reveal--drop {
     opacity: 1;
     transform: none;
     filter: none;
+    animation: none;
+  }
+
+  .mask-reveal,
+  .mask-reveal.is-visible {
+    clip-path: none;
+    animation: none;
+  }
+
+  .web-draw {
+    stroke-dashoffset: 0;
   }
 
   .swing-in {
     opacity: 1;
     animation: none;
+  }
+
+  .spider-sense:hover {
+    animation: none;
+  }
+
+  body.is-swinging .swing-blur {
+    filter: none;
+    transform: none;
   }
 
   *,
@@ -135,7 +411,8 @@
 @media (max-width: 1024px) {
   :root {
     --reveal-shift: 16px;
-    --tilt-max: 2deg;
+    --tilt-max-x: 2deg;
+    --tilt-max-y: 3deg;
     --magnet-max: 3px;
   }
 }
@@ -144,7 +421,13 @@
   :root {
     --reveal-shift: 14px;
     --stagger-step: 50ms;
-    --tilt-max: 0deg;
+    --tilt-max-x: 0deg;
+    --tilt-max-y: 0deg;
     --magnet-max: 0px;
+  }
+
+  body.is-swinging .swing-blur {
+    filter: none;
+    transform: none;
   }
 }

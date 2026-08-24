@@ -1,0 +1,20 @@
+.fx-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+.fx-canvas--bg {
+    z-index: -1;
+}
+
+/* Web strands and impact bursts read on top of the content, but never block it */
+.fx-canvas--fg {
+    z-index: 9996;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fx-canvas {
+        display: none;
+    }
+}

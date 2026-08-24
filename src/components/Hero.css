@@ -35,24 +35,25 @@
     animation: hero-blob-b 32s ease-in-out infinite alternate;
 }
 
+/* Corner web that drifts with the cursor */
 .hero-web {
     position: absolute;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.28;
+    opacity: 0.3;
     background:
         repeating-conic-gradient(from 0deg at 85% 15%, transparent 0deg 14deg, rgba(225, 29, 46, 0.45) 14deg 14.6deg),
         radial-gradient(circle at 85% 15%, transparent 8%, rgba(225, 29, 46, 0.35) 8.4%, transparent 8.8%),
         radial-gradient(circle at 85% 15%, transparent 18%, rgba(30, 111, 255, 0.28) 18.4%, transparent 18.8%),
         radial-gradient(circle at 85% 15%, transparent 30%, rgba(225, 29, 46, 0.22) 30.4%, transparent 30.8%);
     mask-image: radial-gradient(circle at 85% 15%, black 0%, transparent 62%);
-    transform: translate3d(calc(var(--mx, 0) * 22px), calc(var(--my, 0) * 22px), 0);
-    transition: transform 600ms var(--ease-out-web);
+    transform: translate3d(calc(var(--mx, 0) * 26px), calc(var(--my, 0) * 26px), 0);
+    transition: transform 700ms var(--ease-drift);
     will-change: transform;
 }
 
-/* Slow rotation lives on a separate layer so it never fights the pointer parallax transform */
+/* Slow rotation lives on its own layer so it never fights the pointer parallax */
 .hero-web::before {
     content: '';
     position: absolute;
@@ -109,6 +110,7 @@
     font-size: 1.75rem;
     color: var(--accent);
     font-weight: 600;
+    text-shadow: 0 0 26px rgba(225, 29, 46, 0.3);
 }
 
 .hero-description {
@@ -130,24 +132,48 @@
     margin-top: 1rem;
 }
 
-.social-links a {
+/* Icons lift, rotate slightly and light up, and drift toward the cursor */
+.social-icon {
+    position: relative;
+    display: inline-flex;
     font-size: 1.5rem;
     color: var(--text-secondary);
-    display: inline-flex;
-    transition: color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-swing),
+    transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
+    transition:
+        color var(--dur-fast) ease,
+        transform var(--dur-base) var(--ease-swing),
         filter var(--dur-fast) ease;
 }
 
-.social-links a:hover {
+/* Web strand paid out under the icon on hover */
+.social-icon::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 22px;
+    height: 1px;
+    margin-left: -11px;
+    background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-thwip);
+}
+
+.social-icon:hover {
     color: var(--accent);
-    transform: translateY(-3px) scale(1.08);
-    filter: drop-shadow(0 4px 10px rgba(225, 29, 46, 0.45));
+    transform: translate3d(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) - 4px), 0) scale(1.14) rotate(-7deg);
+    filter: drop-shadow(0 5px 12px rgba(225, 29, 46, 0.5));
+}
+
+.social-icon:hover::before {
+    transform: scaleX(1);
 }
 
 .hero-image-wrapper {
     position: relative;
     display: flex;
     justify-content: center;
+    perspective: 900px;
 }
 
 .hero-image-glass {
@@ -158,21 +184,23 @@
     border: 1px solid rgba(225, 29, 46, 0.25);
     backdrop-filter: blur(10px);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
-    transition: border-color var(--dur-base) ease, box-shadow var(--dur-base) ease,
+    overflow: hidden;
+    /*
+     * Only the cursor drives this transform. An idle float animation here would
+     * override the tilt outright, since animations outrank normal declarations.
+     */
+    transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition:
+        border-color var(--dur-base) ease,
+        box-shadow var(--dur-base) ease,
         transform var(--dur-base) var(--ease-out-web);
-    animation: hero-float 9s ease-in-out infinite alternate;
 }
 
 .hero-image-glass:hover {
-    border-color: rgba(225, 29, 46, 0.55);
-    box-shadow: 0 16px 32px rgba(225, 29, 46, 0.18);
-    transform: translateY(-4px);
-}
-
-@keyframes hero-float {
-    to {
-        transform: translate3d(0, -10px, 0);
-    }
+    border-color: rgba(225, 29, 46, 0.6);
+    box-shadow:
+        0 20px 44px rgba(0, 0, 0, 0.45),
+        0 0 34px rgba(225, 29, 46, 0.2);
 }
 
 .hero-image {
@@ -180,6 +208,86 @@
     max-width: 350px;
     border-radius: 12px;
     display: block;
+    transform: translate3d(var(--shift-x, 0px), var(--shift-y, 0px), 0) scale(1.02);
+    transition: transform var(--dur-base) var(--ease-out-web);
+}
+
+/* Comic halftone, kept faint so the photograph stays a photograph */
+.hero-image-halftone {
+    position: absolute;
+    inset: 1rem;
+    border-radius: 12px;
+    pointer-events: none;
+    opacity: 0.16;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.85) 34%, transparent 36%);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+    transition: opacity var(--dur-base) ease;
+}
+
+.hero-image-glass:hover .hero-image-halftone {
+    opacity: 0.28;
+}
+
+/* Red rim light sweeping across the portrait */
+.hero-image-sweep {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(104deg,
+            transparent 40%,
+            rgba(225, 29, 46, 0.28) 48%,
+            rgba(255, 255, 255, 0.42) 50%,
+            rgba(225, 29, 46, 0.28) 52%,
+            transparent 60%);
+    opacity: 0;
+    transform: translate3d(-60%, 0, 0);
+}
+
+.hero-image-glass:hover .hero-image-sweep {
+    animation: portrait-sweep 1100ms var(--ease-thwip) both;
+}
+
+@keyframes portrait-sweep {
+    0% {
+        opacity: 0;
+        transform: translate3d(-60%, 0, 0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(60%, 0, 0);
+    }
+}
+
+/* Web spun into the corner of the frame on hover */
+.hero-image-web {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 130px;
+    height: 130px;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        repeating-conic-gradient(from 272deg at 0% 0%,
+            transparent 0deg 10deg,
+            rgba(225, 29, 46, 0.55) 10deg 10.5deg),
+        radial-gradient(circle at 0% 0%, transparent 30%, rgba(225, 29, 46, 0.4) 30.6%, transparent 31.2%),
+        radial-gradient(circle at 0% 0%, transparent 56%, rgba(150, 175, 225, 0.28) 56.6%, transparent 57.2%);
+    mask-image: radial-gradient(circle at 0% 0%, black 12%, transparent 78%);
+    transform-origin: 0 0;
+    transform: scale(0.5);
+    transition: opacity var(--dur-base) ease, transform var(--dur-slow) var(--ease-thwip);
+}
+
+.hero-image-glass:hover .hero-image-web {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .hero-contact-info {
@@ -222,10 +330,12 @@
     color: var(--text-primary);
     font-weight: 500;
     white-space: nowrap;
+    transition: color var(--dur-fast) ease, transform var(--dur-base) var(--ease-out-web);
 }
 
-.info-value:hover {
+a.info-value:hover {
     color: var(--accent);
+    transform: translateX(3px);
 }
 
 @media (max-width: 768px) {
@@ -249,6 +359,7 @@
 
     .hero-image-wrapper {
         order: -1;
+        perspective: none;
     }
 
     .hero-contact-info {
@@ -265,16 +376,13 @@
     .info-value {
         white-space: normal;
     }
-}
-
-@media (max-width: 768px) {
 
     .hero-web::before {
         animation: none;
     }
 
-    .hero-image-glass {
-        animation: none;
+    .hero-image-web {
+        display: none;
     }
 }
 
@@ -283,11 +391,13 @@
     .hero-section::before,
     .hero-section::after,
     .hero-web::before,
-    .hero-image-glass {
+    .hero-image-glass:hover .hero-image-sweep {
         animation: none;
     }
 
-    .hero-web {
+    .hero-web,
+    .hero-image-glass,
+    .hero-image {
         transform: none;
     }
 }

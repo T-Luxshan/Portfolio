@@ -1,4 +1,4 @@
-.cursor-dot,
+.cursor-core,
 .cursor-ring {
     position: fixed;
     top: 0;
@@ -6,43 +6,122 @@
     z-index: 9998;
     pointer-events: none;
     opacity: 0;
-    transition: opacity var(--dur-fast) ease, width var(--dur-fast) var(--ease-out-web),
-        height var(--dur-fast) var(--ease-out-web), border-color var(--dur-fast) ease,
-        background-color var(--dur-fast) ease;
+    transition: opacity var(--dur-fast) ease;
 }
 
-.cursor-dot {
-    width: 6px;
-    height: 6px;
+.cursor-core {
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: var(--crimson);
-    box-shadow: 0 0 10px rgba(225, 29, 46, 0.9);
+    background: #fff;
+    box-shadow:
+        0 0 6px rgba(255, 255, 255, 0.9),
+        0 0 14px rgba(225, 29, 46, 0.9);
 }
 
 .cursor-ring {
-    width: 30px;
-    height: 30px;
+    display: grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    border: 1px solid rgba(225, 29, 46, 0.55);
+    border: 1px solid rgba(225, 29, 46, 0.5);
+    transition:
+        opacity var(--dur-fast) ease,
+        width var(--dur-fast) var(--ease-swing),
+        height var(--dur-fast) var(--ease-swing),
+        border-color var(--dur-fast) ease,
+        background-color var(--dur-fast) ease,
+        box-shadow var(--dur-fast) ease;
 }
 
-.cursor-dot.is-active,
+.cursor-core.is-active,
 .cursor-ring.is-active {
     opacity: 1;
 }
 
-.cursor-ring.is-hovering {
-    width: 52px;
-    height: 52px;
-    border-color: rgba(225, 29, 46, 0.9);
-    background: rgba(225, 29, 46, 0.08);
+/* Reticle ticks only appear in targeting states */
+.cursor-tick {
+    position: absolute;
+    background: var(--crimson);
+    opacity: 0;
+    transition: opacity var(--dur-fast) ease, transform var(--dur-base) var(--ease-swing);
 }
 
-/* Keep the native cursor visible for accessibility; the FX layer only adds to it. */
+.cursor-tick--n,
+.cursor-tick--s {
+    width: 1px;
+    height: 6px;
+}
+
+.cursor-tick--e,
+.cursor-tick--w {
+    width: 6px;
+    height: 1px;
+}
+
+.cursor-tick--n {
+    top: -9px;
+}
+
+.cursor-tick--s {
+    bottom: -9px;
+}
+
+.cursor-tick--e {
+    right: -9px;
+}
+
+.cursor-tick--w {
+    left: -9px;
+}
+
+/* Hovering a link: tighten and brighten */
+.cursor-ring.is-link {
+    width: 18px;
+    height: 18px;
+    border-color: rgba(225, 29, 46, 0.95);
+    box-shadow: 0 0 12px rgba(225, 29, 46, 0.45);
+}
+
+/* Hovering a button: open into a targeting reticle */
+.cursor-ring.is-button {
+    width: 46px;
+    height: 46px;
+    border-color: rgba(225, 29, 46, 0.85);
+    background: rgba(225, 29, 46, 0.08);
+    box-shadow: 0 0 22px rgba(225, 29, 46, 0.35);
+}
+
+.cursor-ring.is-button .cursor-tick {
+    opacity: 1;
+}
+
+/* Hovering a project: wide open, canvas web strands take over */
+.cursor-ring.is-project {
+    width: 66px;
+    height: 66px;
+    border-color: rgba(225, 29, 46, 0.7);
+    background: rgba(225, 29, 46, 0.05);
+}
+
+.cursor-ring.is-project .cursor-tick {
+    opacity: 0.7;
+    transform: scale(1.6);
+}
+
+.cursor-ring.is-pressed {
+    width: 16px;
+    height: 16px;
+    border-color: #fff;
+    background: rgba(225, 29, 46, 0.3);
+}
+
+/* The native cursor is never hidden, so this layer only ever adds to it. */
 @media (hover: none),
 (prefers-reduced-motion: reduce) {
 
-    .cursor-dot,
+    .cursor-core,
     .cursor-ring {
         display: none;
     }

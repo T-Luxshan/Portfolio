@@ -1,13 +1,20 @@
 .projects-section {
-    background-color: var(--bg-darker);
+    background-color: var(--veil-darker);
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 2rem;
+    /* Shared perspective so neighbouring cards tilt in the same visual space */
+    perspective: 1100px;
 }
 
+/*
+ * The card clips its decorative layers, and clipping flattens 3D, so depth
+ * comes from the grid's perspective plus counter-moving inner layers rather
+ * than from translateZ.
+ */
 .project-card {
     position: relative;
     display: flex;
@@ -15,17 +22,20 @@
     height: 100%;
     padding: 2rem;
     overflow: hidden;
-    transform-style: preserve-3d;
 }
 
-/* Crimson light that follows the cursor across the card */
+/* Dynamic lighting: a crimson key light that tracks the cursor */
 .project-card::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(420px circle at var(--glow-x, 50%) var(--glow-y, 50%),
-            rgba(225, 29, 46, 0.16) 0%,
-            transparent 62%);
+    background:
+        radial-gradient(420px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(225, 29, 46, 0.2) 0%,
+            transparent 62%),
+        radial-gradient(720px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+            rgba(120, 160, 255, 0.07) 0%,
+            transparent 70%);
     opacity: 0;
     transition: opacity var(--dur-base) ease;
     pointer-events: none;
@@ -35,25 +45,93 @@
     opacity: 1;
 }
 
-.project-card.is-visible:hover {
-    transform:
-        perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+/* Web that spins itself into the corner the cursor is nearest */
+.project-corner-web {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 148px;
+    height: 148px;
+    opacity: 0;
+    pointer-events: none;
+    background:
+        repeating-conic-gradient(from 200deg at 100% 0%,
+            transparent 0deg 9deg,
+            rgba(225, 29, 46, 0.5) 9deg 9.5deg),
+        radial-gradient(circle at 100% 0%, transparent 24%, rgba(225, 29, 46, 0.4) 24.6%, transparent 25.2%),
+        radial-gradient(circle at 100% 0%, transparent 44%, rgba(225, 29, 46, 0.3) 44.6%, transparent 45.2%),
+        radial-gradient(circle at 100% 0%, transparent 66%, rgba(150, 175, 225, 0.22) 66.6%, transparent 67.2%);
+    mask-image: radial-gradient(circle at 100% 0%, black 10%, transparent 74%);
+    transform-origin: 100% 0%;
+    transform: scale(0.55);
+    transition:
+        opacity var(--dur-base) var(--ease-out-web),
+        transform var(--dur-slow) var(--ease-thwip);
 }
 
+.project-card:hover .project-corner-web {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Light sweep across the card as it is picked up */
+.project-scanline {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(100deg,
+            transparent 42%,
+            rgba(255, 255, 255, 0.07) 50%,
+            transparent 58%);
+    opacity: 0;
+    transform: translate3d(-45%, 0, 0);
+}
+
+.project-card:hover .project-scanline {
+    animation: card-sweep 900ms var(--ease-thwip) both;
+}
+
+@keyframes card-sweep {
+    0% {
+        opacity: 0;
+        transform: translate3d(-45%, 0, 0);
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(45%, 0, 0);
+    }
+}
+
+/* Real cursor-driven tilt, capped at 4deg on X and 6deg on Y */
 .project-card.is-visible {
     transition:
         opacity var(--dur-base) var(--ease-out-web),
-        filter var(--dur-base) var(--ease-out-web),
         transform var(--dur-base) var(--ease-out-web),
         border-color var(--dur-fast) ease,
         box-shadow var(--dur-base) ease;
 }
 
+.project-card.is-visible:hover {
+    transform:
+        rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translate3d(0, -8px, 0) scale(1.012);
+    border-color: rgba(225, 29, 46, 0.5);
+    box-shadow:
+        0 26px 50px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(225, 29, 46, 0.16);
+}
+
+/* Inner layers shift against the tilt, which is what sells the depth */
 .project-content {
     flex: 1;
     position: relative;
     z-index: 1;
+    transform: translate3d(var(--shift-x, 0px), var(--shift-y, 0px), 0);
+    transition: transform var(--dur-base) var(--ease-out-web);
 }
 
 .project-type {
@@ -64,6 +142,12 @@
     letter-spacing: 0.06em;
     color: var(--text-secondary);
     margin-bottom: 0.75rem;
+    transition: color var(--dur-fast) ease, letter-spacing var(--dur-base) var(--ease-out-web);
+}
+
+.project-card:hover .project-type {
+    color: var(--crimson);
+    letter-spacing: 0.12em;
 }
 
 .project-title {
@@ -104,26 +188,36 @@
     color: var(--text-primary);
     font-weight: 500;
     font-size: 0.9rem;
-    transition: color var(--dur-fast) ease, gap var(--dur-fast) var(--ease-out-web);
+    transition:
+        color var(--dur-fast) ease,
+        gap var(--dur-fast) var(--ease-out-web),
+        transform var(--dur-base) var(--ease-swing);
 }
 
 .project-link svg {
-    transition: transform var(--dur-base) var(--ease-out-web);
+    transition: transform var(--dur-base) var(--ease-swing);
+}
+
+/* The call to action leans toward the cursor */
+.project-card:hover .project-link {
+    transform: translate3d(calc(var(--shift-x, 0px) * -0.5), 0, 0);
 }
 
 .project-link:hover {
     color: var(--accent);
-    gap: 0.65rem;
+    gap: 0.7rem;
+    transform: translate3d(3px, -1px, 0);
 }
 
 .project-link:hover svg {
-    transform: translateX(3px);
+    transform: translateX(3px) rotate(-8deg);
 }
 
-/* Tech badges cascade when the card is hovered */
+/* Technology badges pop in sequence when the card is picked up */
 .project-card:hover .tech-tag {
-    transform: translateY(-2px);
-    transition-delay: calc(var(--i, 0) * 30ms);
+    transform: translateY(-3px) scale(1.03);
+    border-color: rgba(225, 29, 46, 0.4);
+    transition-delay: calc(var(--i, 0) * 34ms);
 }
 
 .project-link-secondary {
@@ -137,5 +231,27 @@
 @media (max-width: 768px) {
     .projects-grid {
         grid-template-columns: 1fr;
+        perspective: none;
+    }
+
+    .project-corner-web {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .project-card:hover .project-scanline,
+    .project-card:hover .tech-tag {
+        animation: none;
+        transform: none;
+    }
+
+    .project-card.is-visible:hover {
+        transform: none;
+    }
+
+    .project-content {
+        transform: none;
     }
 }

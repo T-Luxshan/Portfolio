@@ -1,6 +1,6 @@
 .contact-section {
     position: relative;
-    background-color: var(--bg-darker);
+    background-color: var(--veil-darker);
     text-align: center;
     padding-bottom: 2rem;
     overflow: hidden;
@@ -108,14 +108,32 @@
 
 .contact-socials.is-visible a {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
 }
 
 .contact-socials.is-visible a:hover {
     color: var(--accent);
-    transform: translateY(-5px) scale(1.1);
-    filter: drop-shadow(0 6px 14px rgba(225, 29, 46, 0.45));
+    transform: translate3d(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) - 6px), 0) scale(1.14) rotate(-6deg);
+    filter: drop-shadow(0 8px 16px rgba(225, 29, 46, 0.5));
     transition-delay: 0ms;
+}
+
+/* Web strand paid out beneath the icon */
+.contact-socials a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 26px;
+    height: 1px;
+    margin-left: -13px;
+    background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+    transform: scaleX(0);
+    transition: transform var(--dur-base) var(--ease-thwip);
+}
+
+.contact-socials a:hover::after {
+    transform: scaleX(1);
 }
 
 .social-tooltip {
