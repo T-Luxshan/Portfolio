@@ -14,9 +14,10 @@
     left: -10%;
     width: 50%;
     height: 50%;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(circle, rgba(225, 29, 46, 0.22) 0%, rgba(10, 15, 28, 0) 70%);
     filter: blur(80px);
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .hero-section::after {
@@ -26,9 +27,24 @@
     right: -5%;
     width: 40%;
     height: 40%;
-    background: radial-gradient(circle, rgba(23, 76, 110, 0.12) 0%, rgba(15, 23, 42, 0) 70%);
+    background: radial-gradient(circle, rgba(30, 111, 255, 0.22) 0%, rgba(10, 15, 28, 0) 70%);
     filter: blur(80px);
-    z-index: -1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-web {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    background:
+        repeating-conic-gradient(from 0deg at 85% 15%, transparent 0deg 14deg, rgba(225, 29, 46, 0.45) 14deg 14.6deg),
+        radial-gradient(circle at 85% 15%, transparent 8%, rgba(225, 29, 46, 0.35) 8.4%, transparent 8.8%),
+        radial-gradient(circle at 85% 15%, transparent 18%, rgba(30, 111, 255, 0.28) 18.4%, transparent 18.8%),
+        radial-gradient(circle at 85% 15%, transparent 30%, rgba(225, 29, 46, 0.22) 30.4%, transparent 30.8%);
+    mask-image: radial-gradient(circle at 85% 15%, black 0%, transparent 62%);
 }
 
 .hero-container {
@@ -36,6 +52,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content {
@@ -54,7 +72,7 @@
 .hero-title {
     font-size: 1.75rem;
     color: var(--accent);
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .hero-description {
@@ -95,17 +113,17 @@
 .hero-image-glass {
     position: relative;
     padding: 1rem;
-    background: rgba(23, 76, 110, 0.15);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(26, 35, 64, 0.4);
+    border-radius: 12px;
+    border: 1px solid rgba(225, 29, 46, 0.25);
     backdrop-filter: blur(10px);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-image-glass:hover {
-    border-color: rgba(56, 189, 248, 0.3);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+    border-color: rgba(225, 29, 46, 0.55);
+    box-shadow: 0 16px 32px rgba(225, 29, 46, 0.18);
 }
 
 .hero-image {

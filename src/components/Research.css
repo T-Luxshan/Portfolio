@@ -24,7 +24,7 @@
 .research-icon-wrapper {
     width: 40px;
     height: 40px;
-    background: rgba(23, 76, 110, 0.5);
+    background: rgba(26, 35, 64, 0.9);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -45,9 +45,9 @@
 
 .research-status {
     display: inline-block;
-    background: rgba(56, 189, 248, 0.1);
+    background: rgba(225, 29, 46, 0.12);
     color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.25);
+    border: 1px solid rgba(225, 29, 46, 0.35);
     padding: 0.2rem 0.7rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -79,7 +79,7 @@
 }
 
 .research-tech-tag {
-    background: rgba(23, 76, 110, 0.35);
+    background: rgba(26, 35, 64, 0.9);
     color: var(--text-primary);
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 0.35rem 0.75rem;

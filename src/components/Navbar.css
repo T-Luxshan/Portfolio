@@ -10,9 +10,10 @@
 
 .navbar.scrolled {
     padding: 1rem 0;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(5, 7, 13, 0.92);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(225, 29, 46, 0.35);
 }
 
 .navbar-container {
@@ -72,15 +73,16 @@
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.4);
-    background: rgba(23, 76, 110, 0.3);
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    color: var(--crimson);
+    border: 1px solid rgba(225, 29, 46, 0.55);
+    background: transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-resume-btn:hover {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--accent);
+    background: var(--crimson);
+    border-color: var(--crimson);
+    color: #fff;
 }
 
 .hamburger {

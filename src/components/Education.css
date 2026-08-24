@@ -11,16 +11,16 @@
 }
 
 .education-card {
-    background: rgba(23, 76, 110, 0.12);
+    background: rgba(16, 22, 40, 0.7);
     border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: 2rem;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .education-card:hover {
-    border-color: rgba(56, 189, 248, 0.3);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: rgba(225, 29, 46, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .education-header {
@@ -30,7 +30,7 @@
 }
 
 .edu-icon-wrapper {
-    background: rgba(23, 76, 110, 0.5);
+    background: rgba(26, 35, 64, 0.9);
     color: var(--accent);
     width: 56px;
     height: 56px;

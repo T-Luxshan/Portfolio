@@ -8,6 +8,7 @@ import './Hero.css';
 const Hero = () => {
   return (
     <section id="hero" className="hero-section">
+      <div className="hero-web" aria-hidden="true" />
       <div className="container hero-container">
         <div className="hero-content">
           <h1 className="hero-name">Luxshan Thuraisingam</h1>
