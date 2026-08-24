@@ -36,7 +36,7 @@
 }
 
 /* Corner web that drifts with the cursor */
-.hero-web {
+.hero0-web {
     position: absolute;
     inset: 0;
     z-index: 0;
