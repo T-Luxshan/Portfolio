@@ -10,7 +10,7 @@ const END_TEXT    = 'I AM A SOFTWARE ENGINEER';
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&*!?X';
 
 // Timing (ms)
-const HOLD_MS     = 500;   // show "I AM SPIDER-MAN" before anything moves
+const HOLD_MS     = 1000;   // show "I AM SPIDER-MAN" before anything moves
 const SCRAMBLE_MS = 700;   // intense scramble phase
 const LOCK_MS     = 500;   // characters progressively lock left → right
 const FRAME_MS    = 40;    // ~25 fps for the scramble — fast but still legible
