@@ -206,6 +206,11 @@
 .hero-image {
     width: 100%;
     max-width: 350px;
+    height: auto;
+    /* Keep full width; trim extra headroom from the top (~10% of height) */
+    aspect-ratio: 350 / 470;
+    object-fit: cover;
+    object-position: center 18%;
     border-radius: 12px;
     display: block;
     transform: translate3d(var(--shift-x, 0px), var(--shift-y, 0px), 0) scale(1.02);
@@ -218,7 +223,7 @@
     inset: 1rem;
     border-radius: 12px;
     pointer-events: none;
-    opacity: 0.16;
+    opacity: 0.08;
     background-image: radial-gradient(rgba(0, 0, 0, 0.85) 34%, transparent 36%);
     background-size: 4px 4px;
     mix-blend-mode: multiply;
@@ -226,7 +231,7 @@
 }
 
 .hero-image-glass:hover .hero-image-halftone {
-    opacity: 0.28;
+    opacity: 0.18;
 }
 
 /* Red rim light sweeping across the portrait */
