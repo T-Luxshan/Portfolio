@@ -9,11 +9,11 @@ const Research = () => {
             title: "A VM-Aware Energy-Optimal Model Predictive Control Framework for Proactive Horizontal Autoscaling of Virtual Machines",
             status: "Ongoing",
             type: "Final Year Research Project (Individual)",
-            technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebooks"],
+            technologies: ["Python", "NumPy", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter", "FastAPI", "React"],
             highlights: [
-                "Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline.",
-                "Built a Multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
-                "Developed an ML workload forecaster (HistGradientBoosting, 32 temporal features) predicting workload at t+90s/105s/120s with 97.9% correlation."
+                "Designed a VM-aware MPC controller that aligns ML workload forecasts (90/105/120 s) with 90s VM boot delay,improving SLA compliance from 60.7% to 77.3% while reducing energy 0.8% vs Vanilla MPC.",
+                "Built a multi-layer neural network surrogate model mapping (VMs, workload) to latency & energy (test R² = 0.9767),enabling fast receding-horizon optimisation.",
+                "Trained HistGradientBoosting workload forecasters (39 features) for boot-shifted and near-term horizons achieved 0.95 correlation."
             ],
             link: null
         }
