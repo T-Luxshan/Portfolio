@@ -15,6 +15,8 @@ const Certifications = () => {
         { course: 'Python & Data Visualization', provider: 'DevTown', date: 'Oct 2021' },
         { course: 'Introduction to UI-UX', provider: 'Great Learning', date: 'Aug 2021' },
         { course: 'CYBERHAT 1.0', provider: 'IEEE Computer Society of SLTC', date: 'Jan 2021' },
+        { course: 'Python OOP with Exercises & Projects', provider: 'Udemy', date: 'Nov 2021' },
+        { course: 'Global Cultural Jamboree Participation Certificate', provider: 'Sri Lanka Scout Association', date: 'Jul 2021' },
     ];
 
     return (
