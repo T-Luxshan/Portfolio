@@ -7,6 +7,7 @@ import { usePointerParallax } from '../hooks/useParallax';
 import usePointerTilt from '../hooks/usePointerTilt';
 import useMagnetic from '../hooks/useMagnetic';
 import MagneticButton from './motion/MagneticButton';
+import ScrambleTitle from './ScrambleTitle';
 import './Hero.css';
 
 const SOCIALS = [
@@ -49,7 +50,7 @@ const Hero = () => {
       <div className="container hero-container">
         <div className="hero-content">
           <h1 className="hero-name swing-in" style={{ '--i': 0 }}>Luxshan Thuraisingam</h1>
-          <h2 className="hero-title swing-in" style={{ '--i': 1 }}>Software Engineer</h2>
+          <h2 className="hero-title swing-in" style={{ '--i': 1 }}><ScrambleTitle /></h2>
           <p className="hero-description swing-in" style={{ '--i': 2 }}>
             Focused on building reliable backend systems and clean full stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
           </p>

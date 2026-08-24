@@ -110,7 +110,7 @@
     font-size: 1.75rem;
     color: var(--accent);
     font-weight: 600;
-    text-shadow: 0 0 26px rgba(225, 29, 46, 0.3);
+    /* Shadow is owned by .scramble-title so it can animate independently */
 }
 
 .hero-description {

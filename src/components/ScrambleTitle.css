@@ -1,0 +1,99 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * ScrambleTitle — Spider-Man identity transformation
+ * Lives inside .hero-title so it inherits font-size, color, font-weight.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+.scramble-title {
+    display: inline-block;
+    position: relative;
+    /* let-spacing prevents visual jitter as random chars change width */
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    transition:
+        text-shadow var(--dur-base) ease,
+        filter       var(--dur-base) ease,
+        letter-spacing var(--dur-base) ease;
+}
+
+/* ── Scrambling state ──────────────────────────────────────────────────── */
+.scramble-title.is-scrambling {
+    text-shadow:
+        0 0 12px rgba(225, 29, 46, 0.9),
+        0 0 28px rgba(225, 29, 46, 0.55),
+        0 0 54px rgba(225, 29, 46, 0.25);
+    filter: blur(0.35px);
+    animation: scramble-flicker 80ms linear infinite;
+}
+
+/* Speed-line "energy" bar behind the text while scrambling */
+.scramble-title.is-scrambling::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent            0%,
+        rgba(225, 29, 46, 0.07) 30%,
+        rgba(225, 29, 46, 0.18) 50%,
+        rgba(225, 29, 46, 0.07) 70%,
+        transparent            100%
+    );
+    border-radius: 4px;
+    pointer-events: none;
+    animation: scramble-sweep 160ms linear infinite;
+}
+
+/* Subtle horizontal shake */
+@keyframes scramble-flicker {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-1px); }
+    75%  { transform: translateX(1px); }
+    100% { transform: translateX(0); }
+}
+
+/* Sweeping energy bar */
+@keyframes scramble-sweep {
+    0%   { opacity: 0; transform: translateX(-100%); }
+    40%  { opacity: 1; }
+    100% { opacity: 0; transform: translateX(100%); }
+}
+
+/* ── Settled state ─────────────────────────────────────────────────────── */
+.scramble-title.is-settled {
+    letter-spacing: 0.04em;
+    filter: none;
+    /* Gentle persistent glow — same feel as original .hero-title */
+    text-shadow: 0 0 26px rgba(225, 29, 46, 0.3);
+    animation: title-breathe 5s ease-in-out infinite;
+}
+
+/* Very subtle pulse so the title feels alive but doesn't distract */
+@keyframes title-breathe {
+    0%, 100% { text-shadow: 0 0 26px rgba(225, 29, 46, 0.30); }
+    50%       { text-shadow: 0 0 36px rgba(225, 29, 46, 0.50),
+                              0 0 60px rgba(225, 29, 46, 0.18); }
+}
+
+/* ── Mobile: allow wrapping so no overflow ─────────────────────────────── */
+@media (max-width: 600px) {
+    .scramble-title {
+        white-space: normal;
+        letter-spacing: 0.03em;
+    }
+}
+
+/* ── Reduced motion: jump straight to settled ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .scramble-title,
+    .scramble-title.is-scrambling,
+    .scramble-title.is-settled {
+        animation: none;
+        filter: none;
+        text-shadow: 0 0 26px rgba(225, 29, 46, 0.3);
+        letter-spacing: 0.04em;
+    }
+
+    .scramble-title.is-scrambling::before {
+        display: none;
+    }
+}
