@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { prefersReducedMotion } from '../hooks/useReducedMotion';
+import { markIntroDone } from '../motion/introState';
 import './Intro.css';
 
-const SESSION_KEY = 'intro-played';
 const DURATION = 1750;
 
 const RING_RADII = [16, 30, 44, 58, 72];
 const SPOKES = 16;
 
-const shouldPlay = () => {
-    if (prefersReducedMotion()) return false;
-    try {
-        return window.sessionStorage.getItem(SESSION_KEY) !== 'true';
-    } catch {
-        return false;
-    }
-};
-
 /**
- * Cinematic entrance, once per browser session.
+ * Cinematic entrance on every page load.
  *
  * city grid fades up -> web spreads from the centre -> a red light sweeps
  * across -> the wordmark lands -> the whole web retracts to the edges.
@@ -27,19 +18,21 @@ const shouldPlay = () => {
  * unaffected, and the overlay is inert to pointer events.
  */
 const Intro = () => {
-    const [playing, setPlaying] = useState(shouldPlay);
+    // Play every time unless the user prefers reduced motion.
+    const [playing, setPlaying] = useState(() => !prefersReducedMotion());
 
     useEffect(() => {
-        if (!playing) return;
-
-        try {
-            window.sessionStorage.setItem(SESSION_KEY, 'true');
-        } catch {
-            // Private browsing can reject storage writes; the intro still plays once.
+        if (!playing) {
+            // No intro — unblock ScrambleTitle immediately.
+            markIntroDone();
+            return;
         }
 
         document.body.classList.add('intro-locked');
-        const timer = window.setTimeout(() => setPlaying(false), DURATION);
+        const timer = window.setTimeout(() => {
+            setPlaying(false);
+            markIntroDone();
+        }, DURATION);
 
         return () => {
             window.clearTimeout(timer);
