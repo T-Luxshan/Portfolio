@@ -1,6 +1,52 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import usePointerTilt from '../hooks/usePointerTilt';
+import useReveal from '../hooks/useReveal';
+import mergeRefs from '../hooks/mergeRefs';
+import Reveal from './motion/Reveal';
 import './Projects.css';
+
+const ProjectCard = ({ project, index }) => {
+    const tiltRef = usePointerTilt({ maxTiltX: 4, maxTiltY: 6, maxShift: 8 });
+    const revealRef = useReveal();
+
+    return (
+        <div
+            ref={mergeRefs(tiltRef, revealRef)}
+            className="glass-panel project-card card-accent-left reveal reveal--throw"
+            style={{
+                '--i': index % 3,
+                // Alternate the spin so a row of cards doesn't land in lockstep
+                '--throw-spin': index % 2 ? '3.4deg' : '-3.4deg',
+            }}
+        >
+            <span className="project-corner-web" aria-hidden="true" />
+            <div className="project-content">
+                <span className="project-type">{project.type}</span>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-tech">
+                    {project.technologies.map((tech, idx) => (
+                        <span key={idx} className="tech-tag" style={{ '--i': idx }}>{tech}</span>
+                    ))}
+                </div>
+            </div>
+            <div className="project-footer">
+                {project.link !== '#' && (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                        <FaGithub /> View Code
+                    </a>
+                )}
+                {project.liveLink && (
+                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link project-link-secondary">
+                        <FaExternalLinkAlt /> Live Demo
+                    </a>
+                )}
+            </div>
+            <span className="project-scanline" aria-hidden="true" />
+        </div>
+    );
+};
 
 const Projects = () => {
     const projects = [
@@ -43,7 +89,7 @@ const Projects = () => {
         {
             type: "Research",
             title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
-            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
+            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 0.8% energy and 16.66% SLA compliance vs a standard MPC. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
             technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebook"],
             link: "#"
         }
@@ -52,33 +98,10 @@ const Projects = () => {
     return (
         <section id="projects" className="projects-section content-section">
             <div className="container">
-                <h2 className="section-title">Projects</h2>
+                <Reveal as="h2" className="section-title">Projects</Reveal>
                 <div className="projects-grid">
                     {projects.map((project, index) => (
-                        <div key={index} className="glass-panel project-card card-accent-left">
-                            <div className="project-content">
-                                <span className="project-type">{project.type}</span>
-                                <h3 className="project-title">{project.title}</h3>
-                                <p className="project-desc">{project.description}</p>
-                                <div className="project-tech">
-                                    {project.technologies.map((tech, idx) => (
-                                        <span key={idx} className="tech-tag">{tech}</span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="project-footer">
-                                {project.link !== "#" && (
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                                        <FaGithub /> View Code
-                                    </a>
-                                )}
-                                {project.liveLink && (
-                                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link project-link-secondary">
-                                        <FaExternalLinkAlt /> Live Demo
-                                    </a>
-                                )}
-                            </div>
-                        </div>
+                        <ProjectCard key={index} project={project} index={index} />
                     ))}
                 </div>
             </div>

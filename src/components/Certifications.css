@@ -1,5 +1,5 @@
 .certifications-section {
-    background-color: var(--bg-dark);
+    background-color: var(--veil-dark);
 }
 
 .certifications-grid {
@@ -15,21 +15,37 @@
     padding: 1.25rem 1.5rem;
 }
 
+.certification-card.is-visible:hover {
+    transform: translateY(-2px);
+}
+
 .certification-icon-wrapper {
     width: 36px;
     height: 36px;
-    background: rgba(23, 76, 110, 0.5);
+    background: rgba(26, 35, 64, 0.9);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     margin-top: 0.1rem;
+    transition: transform var(--dur-base) var(--ease-swing), box-shadow var(--dur-base) ease;
+}
+
+.certification-card.is-visible:hover .certification-icon-wrapper {
+    transform: rotate(-8deg) scale(1.08);
+    box-shadow: 0 4px 12px rgba(225, 29, 46, 0.3);
 }
 
 .certification-icon {
     color: var(--accent);
     font-size: 0.9rem;
+}
+
+.certification-icon-wrapper,
+.certification-details {
+    position: relative;
+    z-index: 1;
 }
 
 .certification-details {

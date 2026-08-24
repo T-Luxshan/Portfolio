@@ -1,15 +1,16 @@
 import React from 'react';
 import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import Reveal from './motion/Reveal';
 import './Education.css';
 
 const Education = () => {
     return (
         <section id="education" className="education-section content-section">
             <div className="container education-container">
-                <h2 className="section-title">Education</h2>
+                <Reveal as="h2" className="section-title">Education</Reveal>
 
                 <div className="education-grid">
-                    <div className="education-card">
+                    <Reveal className="education-card" variant="drop" index={0}>
                         <div className="education-header">
                             <div className="edu-icon-wrapper">
                                 <FaGraduationCap className="edu-icon" />
@@ -30,9 +31,9 @@ const Education = () => {
                                 </div> */}
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
 
-                    <div className="education-card">
+                    <Reveal className="education-card" variant="drop" index={1}>
                         <div className="education-header">
                             <div className="edu-icon-wrapper">
                                 <FaGraduationCap className="edu-icon" />
@@ -54,7 +55,7 @@ const Education = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

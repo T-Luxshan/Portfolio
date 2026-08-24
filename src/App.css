@@ -1,1 +1,50 @@
-/* App specific styles if needed */
+.App {
+    position: relative;
+    isolation: isolate;
+}
+
+/* The content stack. Blurs very slightly while a web swing is in flight. */
+.page-stage {
+    position: relative;
+    transform-origin: 50% 40%;
+}
+
+/* Depth cue over the canvas environment so section edges feel continuous */
+.atmosphere-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 120% 70% at 50% 0%,
+            rgba(225, 29, 46, 0.07) 0%,
+            rgba(5, 7, 13, 0) 60%),
+        linear-gradient(180deg,
+            rgba(5, 7, 13, 0.6) 0%,
+            rgba(5, 7, 13, 0) 20%,
+            rgba(5, 7, 13, 0) 74%,
+            rgba(5, 7, 13, 0.72) 100%);
+}
+
+/* Web line connecting consecutive sections */
+.content-section {
+    position: relative;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 56px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(225, 29, 46, 0.55), rgba(225, 29, 46, 0));
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .content-section::before {
+        height: 32px;
+    }
+}

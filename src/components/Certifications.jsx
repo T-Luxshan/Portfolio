@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaCertificate } from 'react-icons/fa';
+import Reveal from './motion/Reveal';
 import './Certifications.css';
 
 const Certifications = () => {
     const certifications = [
         { course: 'Learning Kubernetes', provider: 'LinkedIn Learning', date: 'June 2025' },
-        { course: 'Java 17: First Look', provider: 'LinkedIn Learning', date: 'Nov 2021' },
+        { course: 'Java 17: First', provider: 'LinkedIn Learning', date: 'Nov 2021' },
         { course: 'Programming Foundations: Databases', provider: 'LinkedIn Learning', date: 'Oct 2021' },
         { course: 'Learning SQL Programming', provider: 'LinkedIn Learning', date: 'Oct 2021' },
         { course: 'Meta - Version Control', provider: 'Coursera', date: 'Apr 2023' },
@@ -21,10 +22,15 @@ const Certifications = () => {
     return (
         <section id="certifications" className="certifications-section content-section">
             <div className="container">
-                <h2 className="section-title">Certifications</h2>
+                <Reveal as="h2" className="section-title">Certifications</Reveal>
                 <div className="certifications-grid">
                     {certifications.map((cert, index) => (
-                        <div key={index} className="glass-panel certification-card">
+                        <Reveal
+                            key={index}
+                            index={index % 4}
+                            glow
+                            className="glass-panel certification-card"
+                        >
                             <div className="certification-icon-wrapper">
                                 <FaCertificate className="certification-icon" />
                             </div>
@@ -36,7 +42,7 @@ const Certifications = () => {
                                     <span className="certification-date">{cert.date}</span>
                                 </p>
                             </div>
-                        </div>
+                        </Reveal>
                     ))}
                 </div>
             </div>

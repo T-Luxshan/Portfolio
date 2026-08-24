@@ -1,0 +1,199 @@
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #04060b;
+    pointer-events: none;
+    animation: intro-clear 340ms var(--ease-impact) 1400ms forwards;
+}
+
+body.intro-locked {
+    overflow: hidden;
+}
+
+/* Faint city grid comes up first, before any web appears */
+.intro-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-image:
+        linear-gradient(rgba(120, 150, 210, 0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(120, 150, 210, 0.14) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse at 50% 50%, black 5%, transparent 72%);
+    animation: intro-grid-up 900ms var(--ease-out-web) both;
+}
+
+.intro-web {
+    position: absolute;
+    width: min(96vmin, 780px);
+    height: min(96vmin, 780px);
+    overflow: visible;
+    /* The whole web snaps back toward the edges as the overlay clears */
+    animation: intro-web-retract 420ms var(--ease-thwip) 1180ms both;
+}
+
+.intro-web line,
+.intro-web circle,
+.intro-web path {
+    fill: none;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+}
+
+/* Spokes fire outward from the centre */
+.intro-web-spokes line {
+    stroke: rgba(225, 29, 46, 0.85);
+    stroke-width: 0.9;
+    stroke-dasharray: 120;
+    stroke-dashoffset: 120;
+    animation: intro-draw 320ms var(--ease-thwip) both;
+    animation-delay: calc(180ms + var(--i) * 45ms);
+}
+
+/* Rings spread out behind them */
+.intro-web-rings circle {
+    stroke: rgba(225, 29, 46, 0.5);
+    stroke-width: 0.7;
+    stroke-dasharray: 520;
+    stroke-dashoffset: 520;
+    animation: intro-draw 420ms var(--ease-out-web) both;
+    animation-delay: calc(260ms + var(--i) * 70ms);
+}
+
+.intro-web-strands path {
+    stroke: rgba(150, 175, 225, 0.4);
+    stroke-width: 0.45;
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: intro-draw 340ms var(--ease-out-web) both;
+    animation-delay: calc(420ms + var(--i) * 55ms);
+}
+
+/* Red light sweeping across the frame */
+.intro-sweep {
+    position: absolute;
+    inset: -20% -60%;
+    background: linear-gradient(105deg,
+            transparent 38%,
+            rgba(225, 29, 46, 0.5) 48%,
+            rgba(255, 255, 255, 0.85) 50%,
+            rgba(225, 29, 46, 0.5) 52%,
+            transparent 62%);
+    opacity: 0;
+    animation: intro-sweep 620ms var(--ease-thwip) 620ms both;
+}
+
+.intro-mark {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: clamp(1.7rem, 5.4vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: intro-mark-land 460ms var(--ease-impact) 860ms both;
+}
+
+.intro-mark-bracket {
+    color: var(--crimson);
+}
+
+.intro-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0;
+    animation: intro-role-in 420ms var(--ease-out-web) 1080ms both;
+}
+
+@keyframes intro-grid-up {
+    0% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}
+
+@keyframes intro-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes intro-sweep {
+    0% {
+        opacity: 0;
+        transform: translate3d(-42%, 0, 0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(42%, 0, 0);
+    }
+}
+
+@keyframes intro-mark-land {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -16px, 0) scale(1.14);
+        filter: blur(6px);
+    }
+
+    62% {
+        opacity: 1;
+        transform: translate3d(0, 3px, 0) scale(0.985);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes intro-role-in {
+    from {
+        opacity: 0;
+        letter-spacing: 0.18em;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing: 0.34em;
+    }
+}
+
+@keyframes intro-web-retract {
+    to {
+        opacity: 0;
+        transform: scale(2.6);
+    }
+}
+
+@keyframes intro-clear {
+    to {
+        opacity: 0;
+        transform: translate3d(0, -8%, 0);
+    }
+}

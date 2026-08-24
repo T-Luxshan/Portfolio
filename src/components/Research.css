@@ -1,5 +1,54 @@
 .research-section {
-    background-color: var(--bg-dark);
+    background-color: var(--veil-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Data-visualisation flavoured backdrop: measurement grid plus two drifting plot lines */
+.research-grid-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image:
+        linear-gradient(rgba(30, 111, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30, 111, 255, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 40%, black 10%, transparent 78%);
+}
+
+.research-grid-bg::before,
+.research-grid-bg::after {
+    content: '';
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(225, 29, 46, 0.45) 35%,
+            rgba(30, 111, 255, 0.35) 65%,
+            transparent);
+}
+
+.research-grid-bg::before {
+    top: 32%;
+    animation: plot-drift 26s ease-in-out infinite alternate;
+}
+
+.research-grid-bg::after {
+    top: 68%;
+    animation: plot-drift 34s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes plot-drift {
+    from {
+        transform: translate3d(-4%, 0, 0) scaleY(1);
+    }
+
+    to {
+        transform: translate3d(4%, -14px, 0) scaleY(1.6);
+    }
 }
 
 .research-list {
@@ -24,12 +73,28 @@
 .research-icon-wrapper {
     width: 40px;
     height: 40px;
-    background: rgba(23, 76, 110, 0.5);
+    background: rgba(26, 35, 64, 0.9);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+}
+
+.research-card.is-visible .research-icon-wrapper {
+    animation: research-glow 1400ms var(--ease-out-web) 200ms 1;
+}
+
+@keyframes research-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(225, 29, 46, 0);
+    }
+
+    45% {
+        box-shadow: 0 0 18px 2px rgba(225, 29, 46, 0.45);
+    }
 }
 
 .research-icon {
@@ -45,9 +110,9 @@
 
 .research-status {
     display: inline-block;
-    background: rgba(56, 189, 248, 0.1);
+    background: rgba(225, 29, 46, 0.12);
     color: var(--accent);
-    border: 1px solid rgba(56, 189, 248, 0.25);
+    border: 1px solid rgba(225, 29, 46, 0.35);
     padding: 0.2rem 0.7rem;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -79,7 +144,7 @@
 }
 
 .research-tech-tag {
-    background: rgba(23, 76, 110, 0.35);
+    background: rgba(26, 35, 64, 0.9);
     color: var(--text-primary);
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 0.35rem 0.75rem;
@@ -97,6 +162,17 @@
 .research-highlights li {
     margin-bottom: 0.75rem;
     line-height: 1.6;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity var(--dur-base) var(--ease-out-web),
+        transform var(--dur-base) var(--ease-out-web);
+    transition-delay: calc(var(--i, 0) * 110ms + 150ms);
+}
+
+.research-card.is-visible .research-highlights li {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .research-link {
@@ -116,5 +192,19 @@
 @media (max-width: 768px) {
     .research-card {
         padding: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .research-grid-bg::before,
+    .research-grid-bg::after,
+    .research-card.is-visible .research-icon-wrapper {
+        animation: none;
+    }
+
+    .research-highlights li {
+        opacity: 1;
+        transform: none;
     }
 }

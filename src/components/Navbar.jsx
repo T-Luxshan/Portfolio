@@ -1,44 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { RESUME_URL } from '../constants';
+import useMagnetic from '../hooks/useMagnetic';
+import { swingTo } from '../motion/swing';
 import './Navbar.css';
+
+const links = [
+    { name: 'About', href: '#about', id: 'about' },
+    { name: 'Skills', href: '#skills', id: 'skills' },
+    { name: 'Experience', href: '#experience', id: 'experience' },
+    { name: 'Education', href: '#education', id: 'education' },
+    { name: 'Research', href: '#research', id: 'research' },
+    { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'Certifications', href: '#certifications', id: 'certifications' },
+    { name: 'Contact', href: '#contact', id: 'contact' },
+];
+
+const NavLink = ({ link, isActive, onSelect }) => {
+    const ref = useMagnetic({ strength: 4, radius: 48 });
+
+    return (
+        <a
+            ref={ref}
+            href={link.href}
+            className={`nav-link ${isActive ? 'active' : ''}`}
+            onClick={(e) => onSelect(e, link.id)}
+        >
+            {link.name}
+        </a>
+    );
+};
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('about');
-
-    const links = [
-        { name: 'About', href: '#about', id: 'about' },
-        { name: 'Skills', href: '#skills', id: 'skills' },
-        { name: 'Experience', href: '#experience', id: 'experience' },
-        { name: 'Education', href: '#education', id: 'education' },
-        { name: 'Research', href: '#research', id: 'research' },
-        { name: 'Projects', href: '#projects', id: 'projects' },
-        { name: 'Certifications', href: '#certifications', id: 'certifications' },
-        { name: 'Contact', href: '#contact', id: 'contact' },
-    ];
+    const progressRef = useRef(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+        let frame = 0;
+
+        const update = () => {
+            frame = 0;
+            const scrollY = window.scrollY;
+            setScrolled(scrollY > 50);
+
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = scrollable > 0 ? Math.min(scrollY / scrollable, 1) : 0;
+            if (progressRef.current) {
+                progressRef.current.style.setProperty('--progress', progress.toFixed(4));
+            }
         };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        const onScroll = () => {
+            if (!frame) frame = requestAnimationFrame(update);
+        };
+
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+            if (frame) cancelAnimationFrame(frame);
+        };
     }, []);
 
     useEffect(() => {
-        const sectionIds = links.map((link) => link.id);
         const observers = [];
 
-        sectionIds.forEach((id) => {
+        links.forEach(({ id }) => {
             const el = document.getElementById(id);
             if (!el) return;
 
             const observer = new IntersectionObserver(
                 ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(id);
-                    }
+                    if (entry.isIntersecting) setActiveSection(id);
                 },
                 { rootMargin: '-40% 0px -50% 0px', threshold: 0 }
             );
@@ -50,17 +87,16 @@ const Navbar = () => {
         return () => observers.forEach((observer) => observer.disconnect());
     }, []);
 
-    const handleNavClick = (e, href) => {
+    // The web shoots from the navigation item that was clicked.
+    const handleNavClick = (e, targetId) => {
         e.preventDefault();
-        const targetId = href.replace('#', '');
-        const targetEl = document.getElementById(targetId);
-        if (!targetEl) return;
 
-        const navbarEl = e.target.closest('nav');
-        const navbarHeight = navbarEl ? navbarEl.offsetHeight : 80;
-        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - navbarHeight;
+        const rect = e.currentTarget.getBoundingClientRect();
+        swingTo(targetId, {
+            x: rect.left + rect.width / 2,
+            y: rect.bottom,
+        });
 
-        window.scrollTo({ top: targetTop, behavior: 'smooth' });
         setMenuOpen(false);
     };
 
@@ -75,14 +111,12 @@ const Navbar = () => {
 
                 <div className={`nav-menu ${menuOpen ? 'active' : ''}`}>
                     {links.map((link) => (
-                        <a
+                        <NavLink
                             key={link.name}
-                            href={link.href}
-                            className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
-                            onClick={(e) => handleNavClick(e, link.href)}
-                        >
-                            {link.name}
-                        </a>
+                            link={link}
+                            isActive={activeSection === link.id}
+                            onSelect={handleNavClick}
+                        />
                     ))}
                     <a
                         href={RESUME_URL}
@@ -101,6 +135,7 @@ const Navbar = () => {
                     <div className={`bar ${menuOpen ? 'active' : ''}`}></div>
                 </div>
             </div>
+            <div ref={progressRef} className="nav-progress" aria-hidden="true" />
         </nav>
     );
 };
