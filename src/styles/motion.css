@@ -11,13 +11,13 @@
   --ease-drift: cubic-bezier(0.45, 0, 0.55, 1);
   /* environmental in-out */
 
-  --dur-fast: 180ms;
-  --dur-base: 420ms;
-  --dur-slow: 720ms;
-  --dur-cine: 1100ms;
+  --dur-fast: 200ms;
+  --dur-base: 480ms;
+  --dur-slow: 860ms;
+  --dur-cine: 1300ms;
 
   --reveal-shift: 24px;
-  --stagger-step: 70ms;
+  --stagger-step: 90ms;
   --tilt-max-x: 4deg;
   --tilt-max-y: 6deg;
   --magnet-max: 6px;

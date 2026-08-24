@@ -9,7 +9,7 @@ const Experience = () => {
     return (
         <section id="experience" className="experience-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>Experience</Reveal>
+                <Reveal as="h2" className="section-title">Experience</Reveal>
                 <div className="experience-timeline" ref={timelineRef}>
                     {/*
                      * The rail is a web structure rather than a plain line: a spine

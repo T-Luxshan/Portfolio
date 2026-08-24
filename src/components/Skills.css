@@ -95,16 +95,20 @@
     }
 }
 
-/* Unrelated groups recede while one is focused */
+/* Unrelated groups recede while one is focused — keep visible, just quieter */
 .skill-card.is-dimmed {
-    opacity: 0.42;
-    filter: saturate(0.6);
+    opacity: 0.62;
+    filter: saturate(0.55);
+    /* Override the stagger delay so the dimming starts immediately */
+    transition-delay: 0ms;
 }
 
 .skill-card.is-active.is-visible {
     transform: translateY(-4px);
     border-color: rgba(225, 29, 46, 0.5);
     box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4), 0 0 26px rgba(225, 29, 46, 0.14);
+    /* Lift happens immediately, not after the stagger delay */
+    transition-delay: 0ms;
 }
 
 .skill-category {

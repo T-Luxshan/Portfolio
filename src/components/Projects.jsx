@@ -98,7 +98,7 @@ const Projects = () => {
     return (
         <section id="projects" className="projects-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>Projects</Reveal>
+                <Reveal as="h2" className="section-title">Projects</Reveal>
                 <div className="projects-grid">
                     {projects.map((project, index) => (
                         <ProjectCard key={index} project={project} index={index} />

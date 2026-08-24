@@ -6,7 +6,7 @@ const About = () => {
     return (
         <section id="about" className="about-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>About Me</Reveal>
+                <Reveal as="h2" className="section-title">About Me</Reveal>
 
                 {/* Swings in from the anchor point above, then settles */}
                 <Reveal className="about-shell" variant="swing">

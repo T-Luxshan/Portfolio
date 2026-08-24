@@ -23,7 +23,7 @@ const Research = () => {
         <section id="research" className="research-section content-section">
             <div className="research-grid-bg" aria-hidden="true" />
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>Research</Reveal>
+                <Reveal as="h2" className="section-title">Research</Reveal>
                 <div className="research-list">
                     {research.map((item, index) => (
                         <Reveal key={index} className="glass-panel research-card" index={index}>

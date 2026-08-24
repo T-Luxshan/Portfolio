@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import useReveal from '../hooks/useReveal';
 import useWebGraph from '../hooks/useWebGraph';
 import usePointerTilt from '../hooks/usePointerTilt';
@@ -64,11 +64,21 @@ SKILL_GROUPS.forEach((group, from) => {
 const SkillCard = ({ group, index, nodeRef, active, dimmed, onActivate, onRelease }) => {
     const revealRef = useReveal();
     const glowRef = usePointerTilt({ maxTiltX: 0, maxTiltY: 0 });
+    // Use a separate ref so we can toggle is-active / is-dimmed via classList
+    // without React replacing the whole className (which would wipe is-visible).
+    const cardRef = useRef(null);
+
+    useEffect(() => {
+        const el = cardRef.current;
+        if (!el) return;
+        el.classList.toggle('is-active', active);
+        el.classList.toggle('is-dimmed', dimmed);
+    }, [active, dimmed]);
 
     return (
         <div
-            ref={mergeRefs(revealRef, glowRef, nodeRef)}
-            className={`glass-panel skill-card glow-follow reveal ${active ? 'is-active' : ''} ${dimmed ? 'is-dimmed' : ''}`}
+            ref={mergeRefs(revealRef, glowRef, nodeRef, cardRef)}
+            className="glass-panel skill-card glow-follow reveal"
             style={{ '--i': index % 3 }}
             onMouseEnter={() => onActivate(group.id)}
             onMouseLeave={onRelease}
@@ -97,7 +107,7 @@ const Skills = () => {
     return (
         <section id="skills" className="skills-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>Technical Skills</Reveal>
+                <Reveal as="h2" className="section-title">Technical Skills</Reveal>
 
                 <div
                     ref={containerRef}

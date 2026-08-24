@@ -7,7 +7,7 @@ const Education = () => {
     return (
         <section id="education" className="education-section content-section">
             <div className="container education-container">
-                <Reveal as="h2" className="section-title" mask>Education</Reveal>
+                <Reveal as="h2" className="section-title">Education</Reveal>
 
                 <div className="education-grid">
                     <Reveal className="education-card" variant="drop" index={0}>

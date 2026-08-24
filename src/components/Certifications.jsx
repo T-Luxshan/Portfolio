@@ -20,7 +20,7 @@ const Certifications = () => {
     return (
         <section id="certifications" className="certifications-section content-section">
             <div className="container">
-                <Reveal as="h2" className="section-title" mask>Certifications</Reveal>
+                <Reveal as="h2" className="section-title">Certifications</Reveal>
                 <div className="certifications-grid">
                     {certifications.map((cert, index) => (
                         <Reveal
