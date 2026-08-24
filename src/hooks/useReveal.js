@@ -9,9 +9,13 @@ const getObserver = () => {
     sharedObserver = new IntersectionObserver(
         (entries) => {
             entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('is-visible');
-                sharedObserver.unobserve(entry.target);
+                // Toggle is-visible on every intersection change so animations
+                // replay each time the element scrolls back into view.
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
             });
         },
         { rootMargin: '0px 0px -12% 0px', threshold: 0.05 }
@@ -21,7 +25,8 @@ const getObserver = () => {
 };
 
 /**
- * Adds `is-visible` once the element scrolls into view, then stops observing it.
+ * Toggles `is-visible` every time the element enters / leaves the viewport,
+ * so reveal animations replay on each scroll past.
  * All consumers share a single IntersectionObserver instance.
  */
 const useReveal = () => {
