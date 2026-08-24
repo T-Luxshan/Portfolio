@@ -117,6 +117,7 @@
     font-size: 1.1rem;
     color: var(--text-secondary);
     max-width: 600px;
+    text-align: justify;
 }
 
 .hero-actions {
