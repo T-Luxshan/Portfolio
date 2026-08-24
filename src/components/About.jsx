@@ -18,10 +18,10 @@ const About = () => {
 
                     <div className="glass-panel about-content">
                         <p>
-                            Software Engineer with internship experience at <strong>PickMe</strong>. Proven expertise in designing
-                            complex systems including a three-layer image forensics system and benchmarked distributed message brokers
-                            for peak load passenger handling. Built ML-driven auto-scaling framework for VMs in cloud reducing energy
-                            consumption while meeting SLOs.
+                        Software Engineer with internship experience at PickMe. Experienced in designing and developing 
+                        full-stack applications, RESTful APIs, and backend services. Built secure and scalable applications 
+                        with authentication, database integration, microservices, and CI/CD pipelines, with hands-on 
+                        experience solving complex software engineering problems.
                         </p>
                         <p>
                             Proficient in <strong>Java</strong>, <strong>Go</strong>, Docker, and containerized backend development.
