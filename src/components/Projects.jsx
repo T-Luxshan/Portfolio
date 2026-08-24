@@ -89,7 +89,7 @@ const Projects = () => {
         {
             type: "Research",
             title: "VM-Aware Energy-Optimal MPC Framework for Proactive Horizontal Autoscaling",
-            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 27.8% energy vs a fixed baseline. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
+            description: "Final Year Research Project (Individual). Designed a VM-Aware Multi-Step MPC controller that proactively auto-scales cloud VMs by integrating ML-forecasted workloads (90–120s ahead) into a receding-horizon optimizer, saving 0.8% energy and 16.66% SLA compliance vs a standard MPC. Built a multi-layer neural network surrogate model to forecast cloud energy consumption and latency based on underlying VM workload.",
             technologies: ["Python", "PyTorch", "Scikit-learn", "Pandas", "Dask", "SciPy", "Jupyter Notebook"],
             link: "#"
         }
