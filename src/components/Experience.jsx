@@ -1,14 +1,18 @@
 import React from 'react';
+import { useScrollProgress } from '../hooks/useParallax';
+import Reveal from './motion/Reveal';
 import './Experience.css';
 
 const Experience = () => {
+    const timelineRef = useScrollProgress();
+
     return (
         <section id="experience" className="experience-section content-section">
             <div className="container">
-                <h2 className="section-title">Experience</h2>
-                <div className="experience-timeline">
+                <Reveal as="h2" className="section-title">Experience</Reveal>
+                <div className="experience-timeline" ref={timelineRef}>
 
-                    <div className="timeline-item">
+                    <Reveal className="timeline-item" variant="right">
                         <div className="timeline-dot"></div>
                         <div className="glass-panel timeline-content card-accent-left">
                             <div className="timeline-header">
@@ -23,7 +27,7 @@ const Experience = () => {
                                 <li>Evaluated and benchmarked Golang-based distributed queue technologies across workloads ranging from 10 to 100,000 requests, analyzing throughput and latency to optimize passenger request handling during peak demand.</li>
                             </ul>
                         </div>
-                    </div>
+                    </Reveal>
 
                 </div>
             </div>

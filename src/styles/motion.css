@@ -1,0 +1,150 @@
+:root {
+  --ease-out-web: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-swing: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 720ms;
+  --reveal-shift: 24px;
+  --stagger-step: 70ms;
+  --tilt-max: 4deg;
+  --magnet-max: 6px;
+}
+
+/* Reveal primitive: fade + slide + blur-to-sharp, driven once by IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-shift), 0);
+  transition:
+    opacity var(--dur-base) var(--ease-out-web),
+    transform var(--dur-base) var(--ease-out-web),
+    filter var(--dur-base) var(--ease-out-web),
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-base) ease;
+  transition-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+/* Hover feedback should be immediate even when the reveal delay is staggered */
+.reveal.is-visible:hover {
+  transition-delay: 0ms;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Opt-in blur-to-sharp. Kept off glass panels, which already composite a backdrop-filter. */
+.reveal--blur {
+  filter: blur(6px);
+}
+
+.reveal--blur.is-visible {
+  filter: blur(0);
+}
+
+.reveal--left {
+  transform: translate3d(calc(var(--reveal-shift) * -1), 0, 0);
+}
+
+.reveal--right {
+  transform: translate3d(var(--reveal-shift), 0, 0);
+}
+
+.reveal--scale {
+  transform: scale(0.96);
+}
+
+.reveal--left.is-visible,
+.reveal--right.is-visible,
+.reveal--scale.is-visible {
+  transform: none;
+}
+
+/* Children stagger using their own --i index */
+.stagger-children > * {
+  transition-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+/* Hero entrance: runs on mount rather than on scroll */
+@keyframes swing-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--reveal-shift), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.swing-in {
+  opacity: 0;
+  animation: swing-in var(--dur-slow) var(--ease-out-web) forwards;
+  animation-delay: calc(var(--i, 0) * var(--stagger-step));
+}
+
+/* Magnetic wrapper: translation written by usePointerTilt as custom properties */
+.magnetic {
+  display: inline-flex;
+  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0);
+  transition: transform var(--dur-fast) var(--ease-out-web);
+}
+
+.magnetic:active {
+  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0) scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+    --dur-slow: 1ms;
+    --reveal-shift: 0px;
+    --stagger-step: 0ms;
+    --tilt-max: 0deg;
+    --magnet-max: 0px;
+  }
+
+  .reveal,
+  .reveal--left,
+  .reveal--right,
+  .reveal--scale,
+  .reveal--blur {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .swing-in {
+    opacity: 1;
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Tablet: soften travel distances */
+@media (max-width: 1024px) {
+  :root {
+    --reveal-shift: 16px;
+    --tilt-max: 2deg;
+    --magnet-max: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --reveal-shift: 14px;
+    --stagger-step: 50ms;
+    --tilt-max: 0deg;
+    --magnet-max: 0px;
+  }
+}

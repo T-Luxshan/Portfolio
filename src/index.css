@@ -70,18 +70,41 @@ ul {
 }
 
 .glass-panel {
+  position: relative;
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-base) ease,
+    transform var(--dur-base) var(--ease-out-web),
+    opacity var(--dur-base) var(--ease-out-web);
 }
 
 .glass-panel:hover {
   border-color: rgba(225, 29, 46, 0.4);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Low-intensity cursor-following light, opted into per card via the `glow` prop */
+.glow-follow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      rgba(225, 29, 46, 0.1) 0%,
+      transparent 65%);
+  opacity: 0;
+  transition: opacity var(--dur-base) ease;
+  pointer-events: none;
+}
+
+.glow-follow:hover::before {
+  opacity: 1;
 }
 
 .card-accent-left {
@@ -108,6 +131,19 @@ ul {
   height: 3px;
   background: var(--crimson);
   border-radius: 2px;
+  transform-origin: left center;
+  transition: transform var(--dur-slow) var(--ease-out-web);
+}
+
+/* The underline draws in with the reveal that wraps (or is) the heading */
+.reveal .section-title::after,
+.reveal.section-title::after {
+  transform: scaleX(0);
+}
+
+.reveal.is-visible .section-title::after,
+.reveal.is-visible.section-title::after {
+  transform: scaleX(1);
 }
 
 .content-section {
@@ -116,24 +152,56 @@ ul {
 }
 
 .btn {
+  position: relative;
   display: inline-block;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  overflow: hidden;
   border: none;
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    box-shadow var(--dur-base) var(--ease-out-web),
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) var(--ease-out-web);
+}
+
+/* Ripple-style highlight that tracks the cursor */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      rgba(255, 255, 255, 0.28) 0%,
+      transparent 55%);
+  opacity: 0;
+  transition: opacity var(--dur-base) ease;
+  pointer-events: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn:hover::after {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.985);
 }
 
 .btn-primary {
-  background: var(--crimson);
+  background: linear-gradient(135deg, var(--crimson) 0%, var(--crimson-deep) 100%);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: #f1283a;
-  box-shadow: 0 4px 16px rgba(225, 29, 46, 0.4);
+  background: linear-gradient(135deg, #f1283a 0%, var(--crimson) 100%);
+  box-shadow: 0 8px 22px rgba(225, 29, 46, 0.45);
   color: #fff;
 }
 
@@ -146,6 +214,16 @@ ul {
 .btn-outline:hover {
   background: rgba(30, 111, 255, 0.12);
   color: var(--suit-blue);
+  box-shadow: 0 8px 22px rgba(30, 111, 255, 0.28);
+}
+
+/* MagneticButton wraps .btn links; keep the magnet transform composed with hover lift */
+.magnetic.btn:hover {
+  transform: translate3d(var(--magnet-x, 0px), calc(var(--magnet-y, 0px) - 2px), 0) scale(1.02);
+}
+
+.magnetic.btn:active {
+  transform: translate3d(var(--magnet-x, 0px), var(--magnet-y, 0px), 0) scale(0.985);
 }
 
 .meta-text {
@@ -157,6 +235,7 @@ ul {
 }
 
 .tech-tag {
+  display: inline-block;
   font-size: 0.875rem;
   color: #dbe4ff;
   background: rgba(26, 35, 64, 0.9);
@@ -164,10 +243,14 @@ ul {
   border-radius: 20px;
   font-weight: 500;
   border: 1px solid rgba(30, 111, 255, 0.35);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    transform var(--dur-base) var(--ease-swing);
 }
 
 .tech-tag:hover {
   background: rgba(30, 111, 255, 0.18);
   border-color: rgba(225, 29, 46, 0.35);
+  transform: translateY(-2px) scale(1.04);
 }

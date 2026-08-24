@@ -29,6 +29,17 @@
     padding-left: 1.5rem;
     position: relative;
     color: var(--text-primary);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition:
+        opacity var(--dur-base) var(--ease-out-web),
+        transform var(--dur-base) var(--ease-out-web);
+    transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.achievements-column.is-visible .achievements-list li {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .achievements-list li::before {
@@ -86,11 +97,24 @@
 .badge-item {
     display: flex;
     justify-content: center;
-    transition: opacity 0.2s ease;
+    opacity: 0;
+    transform: scale(0.9);
+    transition:
+        opacity var(--dur-base) var(--ease-out-web),
+        transform var(--dur-base) var(--ease-swing),
+        filter var(--dur-fast) ease;
+    transition-delay: calc(var(--i, 0) * 90ms);
 }
 
-.badge-item:hover {
-    opacity: 0.85;
+.achievements-column.is-visible .badge-item {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.achievements-column.is-visible .badge-item:hover {
+    transform: translateY(-4px) scale(1.06);
+    filter: drop-shadow(0 8px 16px rgba(225, 29, 46, 0.35));
+    transition-delay: 0ms;
 }
 
 .badge-img {
@@ -102,5 +126,14 @@
 @media (max-width: 768px) {
     .achievements-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .achievements-list li,
+    .badge-item {
+        opacity: 1;
+        transform: none;
     }
 }

@@ -1,12 +1,13 @@
 import React from 'react';
+import Reveal from './motion/Reveal';
 import './About.css';
 
 const About = () => {
     return (
         <section id="about" className="about-section content-section">
             <div className="container">
-                <h2 className="section-title">About Me</h2>
-                <div className="glass-panel about-content">
+                <Reveal as="h2" className="section-title">About Me</Reveal>
+                <Reveal className="glass-panel about-content" index={1}>
                     <p>
                         Software Engineer with internship experience at <strong>PickMe</strong>. Proven expertise in designing
                         complex systems including a three-layer image forensics system and benchmarked distributed message brokers
@@ -26,7 +27,7 @@ const About = () => {
                             <span className="stat-label">Projects</span>
                         </div>
                     </div>
-                </div>
+                </Reveal>
             </div>
         </section>
     );

@@ -1,1 +1,115 @@
-/* App specific styles if needed */
+.App {
+    position: relative;
+    isolation: isolate;
+}
+
+/* Slow-drifting atmospheric glows behind everything */
+.atmosphere {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.atmosphere::before,
+.atmosphere::after {
+    content: '';
+    position: absolute;
+    width: 46vw;
+    height: 46vw;
+    border-radius: 50%;
+    filter: blur(120px);
+    will-change: transform;
+}
+
+.atmosphere::before {
+    top: -8%;
+    left: -6%;
+    background: radial-gradient(circle, rgba(225, 29, 46, 0.16) 0%, rgba(10, 15, 28, 0) 70%);
+    animation: drift-a 34s ease-in-out infinite alternate;
+}
+
+.atmosphere::after {
+    bottom: -12%;
+    right: -8%;
+    background: radial-gradient(circle, rgba(30, 111, 255, 0.14) 0%, rgba(10, 15, 28, 0) 70%);
+    animation: drift-b 42s ease-in-out infinite alternate;
+}
+
+/* Vertical vignette so sections read as one continuous page */
+.atmosphere-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            rgba(5, 7, 13, 0.55) 0%,
+            rgba(5, 7, 13, 0) 22%,
+            rgba(5, 7, 13, 0) 78%,
+            rgba(5, 7, 13, 0.55) 100%);
+}
+
+/* Web line connecting consecutive sections */
+.content-section {
+    position: relative;
+}
+
+.content-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 56px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(225, 29, 46, 0.5), rgba(225, 29, 46, 0));
+    pointer-events: none;
+}
+
+@keyframes drift-a {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(6vw, 4vh, 0);
+    }
+}
+
+@keyframes drift-b {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-5vw, -4vh, 0);
+    }
+}
+
+/* Mobile keeps the colour and web language but drops the expensive blurred layers */
+@media (max-width: 768px) {
+    .atmosphere {
+        display: none;
+    }
+
+    .atmosphere-vignette {
+        background: linear-gradient(180deg,
+                rgba(5, 7, 13, 0.4) 0%,
+                rgba(5, 7, 13, 0) 25%,
+                rgba(5, 7, 13, 0) 75%,
+                rgba(5, 7, 13, 0.4) 100%);
+    }
+
+    .content-section::before {
+        height: 32px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .atmosphere::before,
+    .atmosphere::after {
+        animation: none;
+    }
+}

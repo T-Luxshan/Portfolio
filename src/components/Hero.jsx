@@ -3,27 +3,31 @@ import { FaGithub, FaLinkedin, FaPhone, FaMedium, FaHackerrank } from 'react-ico
 import { SiLetterboxd } from 'react-icons/si';
 import profileImg2 from '../assets/images/profile2.jpeg';
 import { RESUME_URL } from '../constants';
+import { usePointerParallax } from '../hooks/useParallax';
+import MagneticButton from './motion/MagneticButton';
 import './Hero.css';
 
 const Hero = () => {
+  const webRef = usePointerParallax();
+
   return (
     <section id="hero" className="hero-section">
-      <div className="hero-web" aria-hidden="true" />
+      <div className="hero-web" ref={webRef} aria-hidden="true" />
       <div className="container hero-container">
         <div className="hero-content">
-          <h1 className="hero-name">Luxshan Thuraisingam</h1>
-          <h2 className="hero-title">Software Engineer</h2>
-          <p className="hero-description">
+          <h1 className="hero-name swing-in" style={{ '--i': 0 }}>Luxshan Thuraisingam</h1>
+          <h2 className="hero-title swing-in" style={{ '--i': 1 }}>Software Engineer</h2>
+          <p className="hero-description swing-in" style={{ '--i': 2 }}>
             Focused on building reliable backend systems and clean full stack applications. Enjoy working close to the system level, understanding performance, scalability, and how systems behave in production.
           </p>
 
-          <div className="hero-actions">
-            <a href="#projects" className="btn btn-primary">View Projects</a>
-            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">View Resume</a>
-            <a href="#contact" className="btn btn-outline">Contact Me</a>
+          <div className="hero-actions swing-in" style={{ '--i': 3 }}>
+            <MagneticButton href="#projects" className="btn btn-primary">View Projects</MagneticButton>
+            <MagneticButton href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="btn btn-outline">View Resume</MagneticButton>
+            <MagneticButton href="#contact" className="btn btn-outline">Contact Me</MagneticButton>
           </div>
 
-          <div className="social-links">
+          <div className="social-links swing-in" style={{ '--i': 4 }}>
             <a href="https://github.com/T-Luxshan" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <FaGithub />
             </a>
@@ -44,7 +48,7 @@ const Hero = () => {
             </a>
           </div>
 
-          <div className="hero-contact-info">
+          <div className="hero-contact-info swing-in" style={{ '--i': 5 }}>
             <div className="contact-info-item">
               <span className="info-label">Email</span>
               <a href="mailto:luxshan.thuraisingam@gmail.com" className="info-value">luxshan.thuraisingam@gmail.com</a>
@@ -60,7 +64,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="hero-image-wrapper">
+        <div className="hero-image-wrapper swing-in" style={{ '--i': 2 }}>
           <div className="hero-image-glass">
             <img src={profileImg2} alt="Luxshan Thuraisingam" className="hero-image" />
           </div>

@@ -1,0 +1,49 @@
+.cursor-dot,
+.cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--dur-fast) ease, width var(--dur-fast) var(--ease-out-web),
+        height var(--dur-fast) var(--ease-out-web), border-color var(--dur-fast) ease,
+        background-color var(--dur-fast) ease;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--crimson);
+    box-shadow: 0 0 10px rgba(225, 29, 46, 0.9);
+}
+
+.cursor-ring {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(225, 29, 46, 0.55);
+}
+
+.cursor-dot.is-active,
+.cursor-ring.is-active {
+    opacity: 1;
+}
+
+.cursor-ring.is-hovering {
+    width: 52px;
+    height: 52px;
+    border-color: rgba(225, 29, 46, 0.9);
+    background: rgba(225, 29, 46, 0.08);
+}
+
+/* Keep the native cursor visible for accessibility; the FX layer only adds to it. */
+@media (hover: none),
+(prefers-reduced-motion: reduce) {
+
+    .cursor-dot,
+    .cursor-ring {
+        display: none;
+    }
+}

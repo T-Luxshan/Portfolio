@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaFlask, FaExternalLinkAlt } from 'react-icons/fa';
+import Reveal from './motion/Reveal';
 import './Research.css';
 
 const Research = () => {
@@ -20,11 +21,12 @@ const Research = () => {
 
     return (
         <section id="research" className="research-section content-section">
+            <div className="research-grid-bg" aria-hidden="true" />
             <div className="container">
-                <h2 className="section-title">Research</h2>
+                <Reveal as="h2" className="section-title">Research</Reveal>
                 <div className="research-list">
                     {research.map((item, index) => (
-                        <div key={index} className="glass-panel research-card">
+                        <Reveal key={index} className="glass-panel research-card" index={index}>
                             <div className="research-card-header">
                                 <div className="research-icon-wrapper">
                                     <FaFlask className="research-icon" />
@@ -39,13 +41,13 @@ const Research = () => {
 
                             <div className="research-tech-tags">
                                 {item.technologies.map((tech, idx) => (
-                                    <span key={idx} className="research-tech-tag">{tech}</span>
+                                    <span key={idx} className="research-tech-tag" style={{ '--i': idx }}>{tech}</span>
                                 ))}
                             </div>
 
                             <ul className="research-highlights">
                                 {item.highlights.map((highlight, idx) => (
-                                    <li key={idx}>{highlight}</li>
+                                    <li key={idx} style={{ '--i': idx }}>{highlight}</li>
                                 ))}
                             </ul>
 
@@ -54,7 +56,7 @@ const Research = () => {
                                     <FaExternalLinkAlt /> View Paper
                                 </a>
                             )}
-                        </div>
+                        </Reveal>
                     ))}
                 </div>
             </div>

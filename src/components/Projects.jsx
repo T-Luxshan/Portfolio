@@ -1,6 +1,46 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import usePointerTilt from '../hooks/usePointerTilt';
+import useReveal from '../hooks/useReveal';
+import mergeRefs from '../hooks/mergeRefs';
+import Reveal from './motion/Reveal';
 import './Projects.css';
+
+const ProjectCard = ({ project, index }) => {
+    const tiltRef = usePointerTilt({ maxTilt: 4 });
+    const revealRef = useReveal();
+
+    return (
+        <div
+            ref={mergeRefs(tiltRef, revealRef)}
+            className="glass-panel project-card card-accent-left reveal"
+            style={{ '--i': index % 3 }}
+        >
+            <div className="project-content">
+                <span className="project-type">{project.type}</span>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
+                <div className="project-tech">
+                    {project.technologies.map((tech, idx) => (
+                        <span key={idx} className="tech-tag" style={{ '--i': idx }}>{tech}</span>
+                    ))}
+                </div>
+            </div>
+            <div className="project-footer">
+                {project.link !== '#' && (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                        <FaGithub /> View Code
+                    </a>
+                )}
+                {project.liveLink && (
+                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link project-link-secondary">
+                        <FaExternalLinkAlt /> Live Demo
+                    </a>
+                )}
+            </div>
+        </div>
+    );
+};
 
 const Projects = () => {
     const projects = [
@@ -52,33 +92,10 @@ const Projects = () => {
     return (
         <section id="projects" className="projects-section content-section">
             <div className="container">
-                <h2 className="section-title">Projects</h2>
+                <Reveal as="h2" className="section-title">Projects</Reveal>
                 <div className="projects-grid">
                     {projects.map((project, index) => (
-                        <div key={index} className="glass-panel project-card card-accent-left">
-                            <div className="project-content">
-                                <span className="project-type">{project.type}</span>
-                                <h3 className="project-title">{project.title}</h3>
-                                <p className="project-desc">{project.description}</p>
-                                <div className="project-tech">
-                                    {project.technologies.map((tech, idx) => (
-                                        <span key={idx} className="tech-tag">{tech}</span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="project-footer">
-                                {project.link !== "#" && (
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                                        <FaGithub /> View Code
-                                    </a>
-                                )}
-                                {project.liveLink && (
-                                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="project-link project-link-secondary">
-                                        <FaExternalLinkAlt /> Live Demo
-                                    </a>
-                                )}
-                            </div>
-                        </div>
+                        <ProjectCard key={index} project={project} index={index} />
                     ))}
                 </div>
             </div>

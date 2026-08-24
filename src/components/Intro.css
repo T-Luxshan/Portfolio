@@ -1,0 +1,77 @@
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-darker);
+    animation: intro-wipe 300ms var(--ease-out-web) 900ms forwards;
+    pointer-events: none;
+}
+
+body.intro-locked {
+    overflow: hidden;
+}
+
+.intro-web {
+    position: absolute;
+    width: min(70vmin, 520px);
+    height: min(70vmin, 520px);
+    overflow: visible;
+    opacity: 0.55;
+}
+
+.intro-web line,
+.intro-web circle {
+    fill: none;
+    stroke: var(--crimson);
+    stroke-width: 0.8;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: intro-draw 700ms var(--ease-out-web) forwards;
+}
+
+.intro-web circle {
+    stroke: rgba(225, 29, 46, 0.65);
+    animation-delay: calc(120ms + var(--i, 0) * 90ms);
+}
+
+.intro-mark {
+    position: relative;
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    opacity: 0;
+    animation: intro-mark-in 420ms var(--ease-out-web) 420ms forwards;
+}
+
+.intro-mark-bracket {
+    color: var(--crimson);
+}
+
+@keyframes intro-draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes intro-mark-in {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes intro-wipe {
+    to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+}

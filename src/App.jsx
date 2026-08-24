@@ -10,11 +10,17 @@ import Research from './components/Research';
 import Projects from './components/Projects';
 import Achievements from './components/Achievements';
 import Contact from './components/Contact';
+import Intro from './components/Intro';
+import CursorFX from './components/CursorFX';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
+      <Intro />
+      <CursorFX />
+      <div className="atmosphere" aria-hidden="true" />
+      <div className="atmosphere-vignette" aria-hidden="true" />
       <Navbar />
       <Hero />
       <About />
