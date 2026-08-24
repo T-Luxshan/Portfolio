@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMedium, FaHackerrank } fro
 import useMagnetic from '../hooks/useMagnetic';
 import Reveal from './motion/Reveal';
 import MagneticButton from './motion/MagneticButton';
+import spiderWeb from '../assets/images/spider-web.png';
 import './Contact.css';
 
 const SOCIALS = [
@@ -36,7 +37,9 @@ const ContactSocial = ({ href, label, Icon, index }) => {
 const Contact = () => {
     return (
         <footer id="contact" className="contact-section content-section">
-            <div className="contact-atmosphere" aria-hidden="true" />
+            <div className="contact-atmosphere" aria-hidden="true">
+                <img src={spiderWeb} className="contact-web-img" alt="" />
+            </div>
 
             <div className="container contact-container">
                 {/* Arrives like a landing: fast drop, hard stop, small settle */}
